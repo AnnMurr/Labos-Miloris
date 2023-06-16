@@ -2,7 +2,24 @@
     &__wrapper {
         padding: 60px 0;
         display: flex;
-        justify-content: space-between;
+
+        @media screen and (@max576) {
+            padding: 30px 0;
+        }
+    }
+
+    &__logo img {
+        @media screen and (@max924) {
+            width: 100px;
+        }
+    }
+
+    &__nav {
+        margin-left: auto;
+
+        @media screen and (@max768) {
+            display: none;
+        }
     }
 
     &__menu {
@@ -10,7 +27,6 @@
 
         li {
             padding: 0 20px;
-
 
             a {
                 color: @color-white;

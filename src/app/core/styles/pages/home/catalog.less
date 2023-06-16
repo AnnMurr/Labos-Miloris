@@ -1,0 +1,57 @@
+.catalog {
+    &__wrapper {
+        padding: 90px 0 118px 0;
+    }
+
+    &__heading h2 {
+        font-weight: 700;
+        font-size: 25px;
+        line-height: 30px;
+        letter-spacing: 0.02em;
+    }
+
+    &__content {
+        padding-top: 60px;
+        display: flex;
+        justify-content: space-between;
+
+        @media screen and (@max924) {
+            flex-direction: column;
+            align-items: center;
+        }
+
+        @media screen and (@max576) {
+            padding-top: 30px;
+        }
+    }
+
+    &__item {
+        max-width: 495px;
+        cursor: pointer;
+        padding-right: 10px;
+        .transition (@prop, @time, @ease);
+
+        &:last-child {
+            padding: 0;
+        }
+
+        @media screen and (@max924) {
+            padding: 0 0 30px 0;
+        }
+
+        &:hover {
+            transform: scale(1.1, 1.1);
+            opacity: 0.6;
+        }
+    }
+
+    &__tittle h4 {
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 20px;
+    }
+
+    .line {
+        margin: 15px 0;
+    }
+}

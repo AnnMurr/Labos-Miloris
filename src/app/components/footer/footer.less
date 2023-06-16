@@ -1,0 +1,125 @@
+.footer {
+    background-color: @color-tuna;
+
+    &__wrapper {
+        padding: 90px 0 100px 0;
+        display: flex;
+        justify-content: space-between;
+
+        @media screen and (@max924) {
+            flex-wrap: wrap;
+        }
+
+        @media screen and (@max768) {
+            justify-content: center;
+        }
+    }
+
+    &__logo {
+        @media screen and(@max924) {
+            width: 100%;
+            padding-bottom: 40px;
+        }
+
+        @media screen and (@max768) {
+            justify-content: center;
+            display: flex;
+        }
+    }
+
+    &__menu,
+    &__contact {
+        @media screen and (@max768) {
+            display: flex;
+            width: 100%;
+            justify-content: space-evenly;
+        }
+
+        @media screen and (@max576) {
+            flex-direction: column;
+            align-items: center;
+            padding-bottom: 14px !important;
+        }
+
+        li {
+            padding-bottom: 14px;
+
+            @media screen and (@max768) {
+                margin: 0 20px;
+            }
+
+            &:last-child {
+                padding: 0;
+            }
+
+            a {
+                font-weight: 400;
+                font-size: 18px;
+                line-height: 21px;
+                color: @color-white;
+                .transition (@prop, @time, @ease);
+
+                &:hover {
+                    color: @color-buttered-rum;
+                }
+            }
+        }
+    }
+}
+
+.authentication {
+    max-width: 351px;
+    width: 100%;
+
+    @media screen and (@max768) {
+        margin-top: 60px;
+    }
+
+    &__choose {
+        display: flex;
+
+        span {
+            padding: 0 5px;
+        }
+    }
+
+    &__sing-in,
+    &__sing-up {
+        color: @color-white;
+        .transition (@prop, @time, @ease);
+
+        &:hover {
+            color: @color-buttered-rum;
+        }
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+
+        input {
+            padding: 14px 14px;
+            width: 100%;
+            margin-top: 14px;
+
+            &::placeholder {
+                font-weight: 300;
+                font-size: 15px;
+                line-height: 18px;
+                color: @color-black;
+            }
+        }
+
+        .btn {
+            max-width: 100%;
+            margin-top: 30px;
+            background-color: @color-buttered-rum;
+            color: @color-black;
+            .transition (@prop, @time, @ease);
+
+            &:hover {
+                opacity: 0.5;
+            }
+        }
+    }
+}
