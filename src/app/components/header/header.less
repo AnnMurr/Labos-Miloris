@@ -1,0 +1,29 @@
+.header {
+    &__wrapper {
+        padding: 60px 0;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    &__menu {
+        display: flex;
+
+        li {
+            padding: 0 20px;
+
+
+            a {
+                color: @color-white;
+                font-family: @sub-font;
+                font-weight: 400;
+                font-size: 16px;
+                line-height: 19px;
+                .transition (@prop, @time, @ease);
+
+                &:hover {
+                    color: @color-buttered-rum;
+                }
+            }
+        }
+    }
+}
