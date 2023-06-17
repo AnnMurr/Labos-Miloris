@@ -1,0 +1,96 @@
+.about-perfume {
+    &__wrapper {
+        padding-top: 56px;
+    }
+
+    &__content {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 80px;
+
+        @media screen and(@max768) {
+            flex-direction: column;
+            align-items: center;
+
+            &:nth-child(2) {
+                flex-direction: column-reverse;
+            }
+        }
+    }
+
+    &__tittle h4 {
+        font-weight: 700;
+        font-size: 25px;
+        line-height: 150%;
+        letter-spacing: 0.1em;
+
+        @media screen and(@max924) {
+            font-size: 22px;
+        }
+
+        @media screen and(@max768) {
+            font-size: 20px;
+        }
+    }
+
+    &__image {
+        @media screen and(@max1024) {
+            max-width: 470px;
+        }
+
+        @media screen and(@max924) {
+            max-width: 400px;
+        }
+
+        @media screen and(@max768) {
+            padding-bottom: 20px;
+        }
+    }
+
+    &__description {
+        padding-top: 80px;
+        max-width: 540px;
+        text-align: center;
+        margin: 0 20px 0 0;
+
+        &:nth-child(2) {
+            margin: 0 0 0 20px;
+
+            @media screen and(@max768) {
+                margin: 0;
+            }
+        }
+
+        @media screen and(@max1024) {
+            max-width: 440px;
+        }
+
+        @media screen and(@max924) {
+            max-width: 360px;
+            padding-top: 0;
+        }
+
+        @media screen and(@max768) {
+            margin: 0;
+            max-width: 400px;
+        }
+    }
+
+    &__text {
+        padding-top: 30px;
+
+        @media screen and(@max924) {
+            padding-top: 15px;
+        }
+
+        p {
+            font-weight: 500;
+            font-size: 17px;
+            line-height: 150%;
+
+            @media screen and(@max924) {
+                font-size: 15px;
+            }
+        }
+    }
+}

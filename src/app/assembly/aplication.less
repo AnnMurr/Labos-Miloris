@@ -1,0 +1,112 @@
+.aplication {
+    &__wrapper {
+        padding: 56px 0 110px 0;
+    }
+
+    .bonuse {
+        padding-bottom: 80px;
+
+        &__tittle {
+            padding-bottom: 40px;
+
+            @media screen and(@max576) {
+                padding-bottom: 30px;
+            }
+
+            h3 {
+                font-weight: 700;
+                font-size: 25px;
+                line-height: 30px;
+
+                @media screen and(@max576) {
+                    font-size: 18px;
+                    line-height: 24px;
+                }
+            }
+        }
+    }
+
+    .app {
+        padding-bottom: 80px;
+
+        @media screen and(@max576) {
+            padding-bottom: 60px;
+        }
+
+        &__text {
+            padding-bottom: 60px;
+
+            h5 {
+                font-weight: 500;
+                font-size: 17px;
+                line-height: 21px;
+
+                @media screen and(@max576) {
+                    font-size: 15px;
+                    line-height: 19px;
+                }
+            }
+
+            span {
+                font-weight: 700;
+                font-size: 25px;
+                line-height: 30px;
+                text-transform: uppercase;
+
+                @media screen and(@max576) {
+                    font-size: 18px;
+                    line-height: 19px;
+                }
+            }
+        }
+
+        &__icon {
+            display: flex;
+            justify-content: space-between;
+
+            &-inner {
+                max-width: 471px;
+
+                &:first-child {
+                    padding-right: 10px;
+                }
+
+                &:last-child {
+                    padding-left: 10px;
+                }
+            }
+        }
+    }
+
+    .points {
+        &__tittle {
+            padding-bottom: 40px;
+
+            @media screen and(@max576) {
+                padding-bottom: 30px;
+            }
+
+            h3 {
+                font-weight: 700;
+                font-size: 25px;
+                line-height: 30px;
+
+                @media screen and(@max576) {
+                    font-size: 20px;
+                    line-height: 24px;
+                }
+            }
+        }
+
+        &__text p {
+            font-weight: 500;
+            font-size: 17px;
+            line-height: 21px;
+
+            @media screen and(@max576) {
+                font-size: 15px;
+                line-height: 19px;
+            }
+        }
+    }
+}

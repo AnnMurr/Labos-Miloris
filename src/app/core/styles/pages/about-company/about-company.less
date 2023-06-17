@@ -1,0 +1,46 @@
+.about-company {
+    &__wrapper {
+        padding: 56px 0 70px 0;
+        text-align: center;
+    }
+
+    &__heading {
+        padding-bottom: 40px;
+
+        h2 {
+            font-weight: 700;
+            font-size: 50px;
+            line-height: 61px;
+            letter-spacing: 0.02em;
+
+            @media screen and (@max768) {
+                font-size: 40px;
+                line-height: 47px;
+            }
+            @media screen and (@max576) {
+                font-size: 25px;
+                line-height: 28px;
+            }
+        }
+    }
+
+    &__text {
+        margin: 0 auto;
+        max-width: 1000px;
+    }
+
+    p {
+        font-weight: 500;
+        font-size: 17px;
+        letter-spacing: 0.02em;
+        line-height: 150%;
+
+        @media screen and (@max576) {
+            font-size: 15px;
+        }
+    }
+
+    &__image {
+        padding-top: 40px;
+    }
+}

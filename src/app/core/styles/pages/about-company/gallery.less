@@ -1,0 +1,26 @@
+.gallery {
+    &__wrapper {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        row-gap: 80px;
+        column-gap: 30px;
+        align-items: center;
+        padding-bottom: 110px;
+
+        @media screen and (@max576) {
+            row-gap: 20px;
+            column-gap: 20px;
+        }
+    }
+
+    &__image {
+
+        &:nth-child(2) {
+            align-self: flex-start;
+        }
+
+        img {
+            width: 100%;
+        }
+    }
+}
