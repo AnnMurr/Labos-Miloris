@@ -1,0 +1,71 @@
+.cards {
+
+    &__wrapper {
+        padding: 56px 0 110px 0;
+        display: grid;
+        justify-content: space-between;
+        grid-template-columns: auto auto auto;
+        grid-column-gap: 10px;
+        row-gap: 60px;
+    }
+
+    .card {
+        max-width: 350px;
+        background-color: @color-tuna-07;
+
+        &__content {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px 30px;
+        }
+
+        &__info {
+            .btn {
+                width: 158px;
+                height: 37px;
+                background-color: @color-buttered-rum;
+                font-weight: 600;
+                font-size: 15px;
+                line-height: 18px;
+                border-radius: 5px;
+            }
+        }
+
+        &__tittle h4 {
+            font-weight: 600;
+            font-size: 20px;
+            line-height: 23px;
+        }
+
+        &__price {
+            padding: 20px 0;
+
+            span {
+                font-weight: 300;
+                font-size: 15px;
+                line-height: 18px;
+            }
+        }
+
+        &__detail button {
+            font-weight: 300;
+            font-size: 13px;
+            line-height: 15px;
+            text-decoration: dotted;
+            color: @color-white;
+            position: relative;
+        }
+
+        &__detail button::after {
+            content: " ";
+            background-color: #A2810E;
+            border: 2.5px solid #A2810E;
+            border-radius: 99rem;
+            height: 0;
+            width: 0;
+            margin-top: 6px;
+            left: -8px;
+            position: absolute;
+        }
+    }
+}

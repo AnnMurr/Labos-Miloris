@@ -40,3 +40,30 @@ body {
     background-color: @color-white;
     display: block;
 }
+
+.cross {
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    right: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &::after,
+    &::before {
+        content: "";
+        position: absolute;
+        background-color: @color-white;
+        width: 25px;
+        height: 2px;
+      }
+
+      &::before {
+        transform: rotate(45deg);
+      }
+
+      &::after {
+        transform: rotate(-45deg);
+      }
+  }

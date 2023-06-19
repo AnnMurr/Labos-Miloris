@@ -1,0 +1,29 @@
+.burger {
+    width: 40px;
+    height: 40px;
+    display: none;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    position: absolute;
+    right: 15px;
+    top: 60px;
+    border: 1px solid white;
+    border-radius: 1px;
+    padding: 5px;
+
+    @media screen and(@max576) {
+        top: 30px;
+    }
+
+    @media screen and(@max768) {
+        display: flex;
+    }
+
+    span {
+        display: block;
+        width: 20px;
+        height: 2px;
+        background-color: @color-white;
+    }
+}
