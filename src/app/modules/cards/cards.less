@@ -7,16 +7,46 @@
         grid-template-columns: auto auto auto;
         grid-column-gap: 10px;
         row-gap: 60px;
+
+        @media screen and (@max924) {
+            grid-template-columns: auto auto;
+        }
+
+        @media screen and (@max576) {
+            grid-template-columns: auto;
+            justify-content: center;
+        }
     }
 
     .card {
         max-width: 350px;
         background-color: @color-tuna-07;
 
+        @media screen and (@max768) {
+            max-width: 260px;
+        }
+
+        @media screen and (@max576) {
+            max-width: 350px;
+        }
+
+        &__image {
+            height: 292px;
+            max-height: 100%;
+
+            @media screen and (@max924) {
+                height: fit-content;
+            }
+        }
+
         &__content {
             display: flex;
             justify-content: space-between;
             padding: 20px 30px;
+
+            @media screen and (@max768) {
+                padding: 10px;
+            }
         }
 
         &__info {
@@ -31,10 +61,24 @@
             }
         }
 
-        &__tittle h4 {
-            font-weight: 600;
-            font-size: 20px;
-            line-height: 23px;
+        &__tittle {
+            max-width: 160px;
+            word-wrap: break-word;
+
+            @media screen and (@max768) {
+                max-width: 130px;
+            }
+
+            h4 {
+                font-weight: 600;
+                font-size: 20px;
+                line-height: 23px;
+
+                @media screen and (@max768) {
+                    font-size: 18px;
+                    line-height: 20px;
+                }
+            }
         }
 
         &__price {

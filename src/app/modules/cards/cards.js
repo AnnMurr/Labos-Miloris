@@ -24,7 +24,6 @@ function createCardImage(url) {
     image.alt = 'perfume'
     image.loading = 'eager'
     image.src = url
-    image.style.height ='292px'
     cardImageInner.append(image)
 
     return cardImageInner
