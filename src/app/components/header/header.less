@@ -1,6 +1,11 @@
 .header {
+    position: sticky;
+    top: 0;
+    z-index: 6;
+    background-color: @color-black;
+
     &__wrapper {
-        padding: 60px 0;
+        padding: 40px 0;
         display: flex;
 
         @media screen and (@max576) {
@@ -9,9 +14,7 @@
     }
 
     &__logo img {
-        @media screen and (@max924) {
             width: 100px;
-        }
     }
 
     &__nav {

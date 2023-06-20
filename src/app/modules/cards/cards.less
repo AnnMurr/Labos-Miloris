@@ -2,6 +2,10 @@
 
     &__wrapper {
         padding: 56px 0 110px 0;
+    }
+
+    &__inner {
+
         display: grid;
         justify-content: space-between;
         grid-template-columns: auto auto auto;
@@ -19,8 +23,15 @@
     }
 
     .card {
+        display: none;
+        opacity: 0;
         max-width: 350px;
         background-color: @color-tuna-07;
+        transition: opacity 1s ease;
+
+        &_active {
+            display: block;
+        }
 
         @media screen and (@max768) {
             max-width: 260px;
@@ -110,6 +121,24 @@
             margin-top: 6px;
             left: -8px;
             position: absolute;
+        }
+    }
+
+    &__show-more {
+        margin: 60px auto 0 auto;
+        display: block;
+        background-color: transparent;
+        border: 1px solid @color-white;
+        font-size: 18px;
+        line-height: 20px;
+        font-weight: 400;
+        opacity: 0.5;
+        .transition (@prop, @time, @ease);
+
+        &:hover {
+            opacity: 1;
+            background-color: transparent;
+            color: @color-white;
         }
     }
 }

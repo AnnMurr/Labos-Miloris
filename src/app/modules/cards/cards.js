@@ -1,6 +1,8 @@
 import { CardsApi } from "../../core/API/cards-api"
+import { hiddenCards } from "../../core/utils/show-more"
 
 const cardsWrapper = document.querySelector('.cards__wrapper')
+const cardsInner = document.querySelector('.cards__inner')
 
 async function getElements() {
     let array = await CardsApi.getCards()
@@ -8,13 +10,25 @@ async function getElements() {
     array.forEach(element => {
         careateCard(element.url, element.tittle, element.price)
     })
+
+    createShowMoreBtn()
+    hiddenCards()
 }
 
+function createShowMoreBtn() {
+    const showMoreBtn = document.createElement('button')
+    showMoreBtn.classList.add('btn', 'cards__show-more')
+    showMoreBtn.textContent = 'Показать больше'
+
+    cardsWrapper.appendChild(showMoreBtn)
+    
+}
+ 
 function careateCard(url, title, price) {
     const card = document.createElement('div')
     card.classList.add('card')
     card.append(createCardImage(url), createContentWrapper(title, price))
-    cardsWrapper.append(card)
+    cardsInner.append(card)
 }
 
 function createCardImage(url) {
