@@ -1,1 +1,1 @@
-export * as showMore from './show-more.js'
+export * as filterCatalog from './filter-catalog.js'

@@ -1,5 +1,4 @@
 .cards {
-
     &__wrapper {
         padding: 56px 0 110px 0;
     }
@@ -11,6 +10,7 @@
         grid-template-columns: auto auto auto;
         grid-column-gap: 10px;
         row-gap: 60px;
+        min-height: 100vh;
 
         @media screen and (@max924) {
             grid-template-columns: auto auto;
@@ -28,6 +28,7 @@
         max-width: 350px;
         background-color: @color-tuna-07;
         transition: opacity 1s ease;
+        border-radius: 5px;
 
         &_active {
             display: block;
@@ -47,6 +48,11 @@
 
             @media screen and (@max924) {
                 height: fit-content;
+            }
+
+            img {
+                border-top-left-radius: 5px;
+                border-top-right-radius: 5px;
             }
         }
 

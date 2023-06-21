@@ -3,28 +3,43 @@ import { hiddenCards } from "../../core/utils/show-more"
 
 const cardsWrapper = document.querySelector('.cards__wrapper')
 const cardsInner = document.querySelector('.cards__inner')
+const source = localStorage.getItem('source')
 
-async function getElements() {
-    let array = await CardsApi.getCards()
+const sourceFunctions = {
+    'catalogWomenBtn': CardsApi.getWomenCards,
+    'catalogMenBtn': CardsApi.getMenCards,
+    'catalogSelectiveBtn': CardsApi.getSelectiveCards,
+}
 
-    array.forEach(element => {
-        careateCard(element.url, element.tittle, element.price)
+function filterCards() {
+    if (source && sourceFunctions.hasOwnProperty(source)) {
+        const getCardsFunction = sourceFunctions[source];
+        getElements(getCardsFunction());
+        localStorage.removeItem('source');
+    } else {
+        getElements(CardsApi.getCards());
+    }
+}
+
+async function getElements(dataCards) {
+    let cards = await dataCards
+
+    cards.forEach(element => {
+        createCard(element.url, element.tittle, element.price)
     })
 
     createShowMoreBtn()
     hiddenCards()
 }
 
-function createShowMoreBtn() {
+export function createShowMoreBtn() {
     const showMoreBtn = document.createElement('button')
     showMoreBtn.classList.add('btn', 'cards__show-more')
     showMoreBtn.textContent = 'Показать больше'
-
     cardsWrapper.appendChild(showMoreBtn)
-    
 }
- 
-function careateCard(url, title, price) {
+
+export function createCard(url, title, price) {
     const card = document.createElement('div')
     card.classList.add('card')
     card.append(createCardImage(url), createContentWrapper(title, price))
@@ -100,7 +115,7 @@ function careateCardDetail() {
 }
 
 function init() {
-    getElements()
+    filterCards()
 }
 
 document.addEventListener('DOMContentLoaded', init)

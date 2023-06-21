@@ -11,6 +11,49 @@ export class CardsApi {
         })
         .catch(error => { throw error })    
     }    
+
+    static getWomenCards() {
+        return fetch(CardsApi.cardsUrl)
+         .then(response => response.json())
+         .then(data => {
+            let womenData = []
+            data.forEach(element => {
+                if(element.chapter === 'women') {
+                    womenData.push(element)
+                }
+            })
+            return womenData
+         })
+         .catch(error => { throw error })    
+     } 
+    static getMenCards() {
+        return fetch(CardsApi.cardsUrl)
+         .then(response => response.json())
+         .then(data => {
+            let womenData = []
+            data.forEach(element => {
+                if(element.chapter === 'men') {
+                    womenData.push(element)
+                }
+            })
+            return womenData
+         })
+         .catch(error => { throw error })    
+     } 
+    static getselectiveCards() {
+        return fetch(CardsApi.cardsUrl)
+         .then(response => response.json())
+         .then(data => {
+            let womenData = []
+            data.forEach(element => {
+                if(element.chapter === 'selective') {
+                    womenData.push(element)
+                }
+            })
+            return womenData
+         })
+         .catch(error => { throw error })    
+     } 
 }
 
 

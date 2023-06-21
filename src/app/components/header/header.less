@@ -14,7 +14,7 @@
     }
 
     &__logo img {
-            width: 100px;
+        width: 100px;
     }
 
     &__nav {
@@ -38,10 +38,21 @@
                 font-size: 16px;
                 line-height: 19px;
                 .transition (@prop, @time, @ease);
+                position: relative;
 
-                &:hover {
-                    color: @color-buttered-rum;
+                &::before {
+                    content: "";
+                    width: 0;
+                    height: 100%;
+                    border-top: 2px solid @color-white;
+                    position: absolute;
+                    left: 0%;
+                    top: 100%;
+                    transition: width 0.5s;
                 }
+                &:hover::before {
+                    width: 100%;
+                  }
             }
         }
     }

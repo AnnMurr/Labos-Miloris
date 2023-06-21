@@ -57,10 +57,22 @@
                 font-size: 18px;
                 line-height: 21px;
                 color: @color-white;
-                .transition (@prop, @time, @ease);
+                .transition (@prop, 2s, @ease);
+                position: relative;
 
-                &:hover {
-                    color: @color-buttered-rum;
+                &::before {
+                    content: "";
+                    width: 0;
+                    height: 100%;
+                    border-top: 2px solid @color-white;
+                    position: absolute;
+                    left: 0%;
+                    top: 100%;
+                    transition: width 0.5s;
+                }
+
+                &:hover::before {
+                    width: 100%;
                 }
             }
         }
@@ -114,7 +126,7 @@
             max-width: 100%;
             margin-top: 30px;
             background-color: @color-buttered-rum;
-            
+
             color: @color-white;
             .transition (@prop, @time, @ease);
 
