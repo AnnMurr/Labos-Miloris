@@ -16,31 +16,46 @@ function basketStoreData() {
 function addItemElements() {
     const basketStore = basketStoreData()
     const itemsWrapper = document.querySelector('.basket-modal .basket-modal__items')
-   if(busketModal.classList.contains('basket-modal_active')) {
-    basketStore.forEach(element => {
-        itemsWrapper.append(createBasketItem(element))
-    })
-   }
+    
+    if (busketModal.classList.contains('basket-modal_active')) {
+        basketStore.forEach(element => {
+            itemsWrapper.append(createBasketItem(element))
+        })
+    }
 }
 
 export async function addToBasketStore(event) {
-    const cardsApi = await CardsApi.getCards();
-    const basketStore = basketStoreData();
-    const elementId = event.target.parentNode.parentNode.parentNode.id;
-    let newBasketStore = [];
+    const cardsFromApi = await CardsApi.getCards()
+    const basketStore = basketStoreData()
+    const elementId = event.target.parentNode.parentNode.parentNode.id
+    let newBasketStore = []
+    const cardModel = cardsFromApi.find(item => item.id === elementId)
 
     if (basketStore) {
-        newBasketStore = basketStore;
-        const element = cardsApi.find(item => item.id === elementId)
-        const existingItem = newBasketStore.find(item => item.id === elementId);
+        newBasketStore = basketStore
+        const existingItem = newBasketStore.find(item => item.id === elementId)
+
         if (existingItem) {
             existingItem.quantity = (Number(existingItem.quantity) + 1).toString()
-            element.quantity = (Number(element.quantity) + 1).toString()
+            cardModel.quantity = (Number(cardModel.quantity) + 1).toString()
         } else {
-            
-            newBasketStore.push(element)
-        } 
-    } 
+
+            newBasketStore.push(cardModel)
+        }
+    } else {
+        newBasketStore.push(cardModel)
+    }
 
     setCardToStore(newBasketStore);
+}
+
+export function deleteItem(event) {
+    const basketItem = event.target.parentNode
+    const basketStore = basketStoreData()
+    const basketWithoutRemovedItem = basketStore.filter(item => basketItem.id !== item.id)
+    setCardToStore(basketWithoutRemovedItem)
+
+    if (event.target.classList.contains('cross')) {
+        basketItem.remove()
+    }
 }

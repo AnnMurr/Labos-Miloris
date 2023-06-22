@@ -1,4 +1,5 @@
 import { closeBusketModalByBtnCross } from "./basket-close"
+import { deleteItem } from "./basket"
 
 const busketModal = document.querySelector('.basket-modal')
 
@@ -26,6 +27,7 @@ function createBasketModalHeader() {
 export function createBasketItemsWrapper() {
     const itemsWrapper = document.createElement('div')
     itemsWrapper.classList.add('basket-modal__items')
+    itemsWrapper.addEventListener('click', deleteItem)
 
     return itemsWrapper
 }

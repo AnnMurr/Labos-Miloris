@@ -20,7 +20,8 @@ export function closeBusketModalByBtnCross() {
 
 function closeBusketModalOutside(event) {
     if(!busketModal.contains(event.target)
-    && !busketBtn.contains(event.target)) {
+    && !busketBtn.contains(event.target)
+    && !event.target.classList.contains('cross')) {
         busketModal.classList.remove('basket-modal_active')
         checkBusketModalClass()
     }
