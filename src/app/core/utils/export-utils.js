@@ -1,1 +1,0 @@
-export * as filterCatalog from './filter-catalog.js'

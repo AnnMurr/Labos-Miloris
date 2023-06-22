@@ -1,5 +1,6 @@
 import { CardsApi } from "../../core/API/cards-api"
 import { hiddenCards } from "../../core/utils/show-more"
+import { addToBasketStore } from "../basket/basket.js"
 
 const cardsWrapper = document.querySelector('.cards__wrapper')
 const cardsInner = document.querySelector('.cards__inner')
@@ -25,7 +26,7 @@ async function getElements(dataCards) {
     let cards = await dataCards
 
     cards.forEach(element => {
-        createCard(element.url, element.tittle, element.price)
+        createCard(element.url, element.tittle, element.price, element.id)
     })
 
     createShowMoreBtn()
@@ -39,9 +40,10 @@ export function createShowMoreBtn() {
     cardsWrapper.appendChild(showMoreBtn)
 }
 
-export function createCard(url, title, price) {
+export function createCard(url, title, price, id) {
     const card = document.createElement('div')
     card.classList.add('card')
+    card.id = id
     card.append(createCardImage(url), createContentWrapper(title, price))
     cardsInner.append(card)
 }
@@ -88,7 +90,7 @@ function createCardInfoPrice(PriceText) {
     const cardInfoPrice = document.createElement('div')
     cardInfoPrice.classList.add('card__price')
     const cardInfoPriceText = document.createElement('span')
-    cardInfoPriceText.textContent = PriceText
+    cardInfoPriceText.textContent = `${PriceText} $`
     cardInfoPrice.append(cardInfoPriceText)
 
     return cardInfoPrice
@@ -99,6 +101,7 @@ function createBtnToBasket() {
     cardBtn.classList.add('btn')
     cardBtn.type = 'button'
     cardBtn.textContent = 'В корзину'
+    cardBtn.addEventListener('click', addToBasketStore)
 
     return cardBtn
 }

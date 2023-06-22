@@ -1,2 +1,4 @@
 import { burger } from "./modules/burger/export-burger"
-import { filterCatalog } from "./core/utils/export-utils"
+import { basket } from "./modules/basket/basket-export"
+import { basketClose } from "./modules/basket/basket-export"
+import { createBasket } from "./modules/basket/basket-export"

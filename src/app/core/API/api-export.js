@@ -1,1 +1,0 @@
-export * as cardsApi from './cards-api.js'

@@ -1,0 +1,112 @@
+.basket {
+    width: 30px;
+    height: 30px;
+    margin-left: 120px;
+    cursor: pointer;
+    .transition (@prop, @time, @ease);
+
+    @media screen and (@max1024) {
+        margin-left: 15px;
+    }
+
+    @media screen and (@max768) {
+        display: none;
+    }
+
+    &:hover {
+        transform: scale(-1, 1);
+    }
+}
+
+.basket-modal {
+    position: absolute;
+    right: 0;
+    width: 30%;
+    background-color: @color-black;
+    border: 2px solid @color-white;
+    padding: 40px 15px;
+    top: 80px;
+    display: none;
+
+    &_active {
+        display: block;
+    }
+
+    &__items {
+        padding-top: 10px;
+    }
+
+    .basket-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 5px 0;
+
+        &__title {
+            max-width: 150px;
+            word-wrap: break-word;
+
+            h5 {
+                font-weight: 500;
+                font-size: 16px;
+                line-height: 20px;
+            }
+        }
+
+        &-minus,
+        &-plus {
+            cursor: pointer;
+            color: @color-white;
+        }
+
+        &__count {
+            display: flex;
+            align-items: center;
+
+            span {
+                font-size: 16px;
+                font-weight: 600;
+            }
+        }
+
+        &-quantity {
+            padding: 0 5px;
+        }
+
+        &__price span {
+            font-size: 15px;
+            font-weight: 300;
+        }
+
+        .cross_small {
+            position: static;
+        }
+    }
+
+    &__footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: end;
+        padding-top: 30px;
+  
+
+        .btn {
+            max-width: 100px;
+            height: 40px;
+            background-color: @color-buttered-rum;
+            border-radius: 5px;
+            font-weight: 600;
+            font-size: 16px;
+            line-height: 20px;
+        }
+    }
+
+    &__delite-all {
+        color: @color-white;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 20px;
+        margin-bottom: 10px;
+        border-bottom: 1px solid @color-white;
+    }
+}

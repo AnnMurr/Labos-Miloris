@@ -42,13 +42,13 @@ body {
 }
 
 .cross {
-    position: absolute;
     width: 25px;
     height: 25px;
     right: 40px;
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
 
     &::after,
     &::before {
@@ -57,13 +57,45 @@ body {
         background-color: @color-white;
         width: 25px;
         height: 2px;
-      }
+        .transition (@prop, @time, @ease);
+       
+    }
 
-      &::before {
+    &::before {
         transform: rotate(45deg);
-      }
+    }
 
-      &::after {
+    &::after {
         transform: rotate(-45deg);
-      }
-  }
+    }
+
+    &:hover::after {
+        transform: rotate(45deg);
+    }
+
+    &:hover::before {
+        transform: rotate(-45deg);
+    }
+
+    &_small {
+        width: 10px;
+        height: 10px;
+
+        &::after,
+        &::before {
+            width: 10px;
+        }
+    }
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+
+    &__heading h3 {
+        font-weight: 700;
+        font-size: 23px;
+        line-height: 27px;
+        letter-spacing: 0.02em;
+    }
+}
