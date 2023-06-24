@@ -29,10 +29,13 @@ function closeBusketModalOutside(event) {
 
 function checkBusketModalClass() {
     const itemsWrapper = document.querySelector('.basket-modal .basket-modal__items')
+    const basketModalFooter = document.querySelector('.basket-modal__footer')
+
     if(busketModal.classList.contains('basket-modal_active')) {
         document.addEventListener('click', closeBusketModalOutside)
     } else {
         document.removeEventListener('click', closeBusketModalOutside)
         itemsWrapper.innerHTML = null
+        basketModalFooter.innerHTML = null
     }
 }

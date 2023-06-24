@@ -1,5 +1,5 @@
 import { closeBusketModalByBtnCross } from "./basket-close"
-import { deleteItem } from "./basket"
+import { deleteItem, deliteAllItems } from "./basket"
 
 const busketModal = document.querySelector('.basket-modal')
 
@@ -90,15 +90,16 @@ function createBasketItemCross() {
     return cross
 }
 
-function createBasketModalFooter() {
+export function createBasketModalFooter() {
     const basketModalFooter = document.createElement('div')
     basketModalFooter.classList.add('basket-modal__footer')
+    basketModalFooter.style.display = 'none'
 
-    basketModalFooter.append(createBasketModalFooterBtns(), createBasketGeneralPrice())
+    
     return basketModalFooter
 }
-
-function createBasketModalFooterBtns() {
+ 
+export function createBasketModalFooterBtns() {
     const btnsWrapper = document.createElement('div')
     btnsWrapper.classList.add('basket-modal__buttons')
 
@@ -106,6 +107,7 @@ function createBasketModalFooterBtns() {
     deliteAllBnt.classList.add('basket-modal__delite-all')
     deliteAllBnt.type = 'button'
     deliteAllBnt.textContent = 'Очистить корзину'
+    deliteAllBnt.addEventListener('click', deliteAllItems)
 
     const orderBtn = document.createElement('button')
     orderBtn.classList.add('btn', 'basket-modal__order')
@@ -117,14 +119,31 @@ function createBasketModalFooterBtns() {
     return btnsWrapper
 }
 
-function createBasketGeneralPrice() {
+export function createBasketGeneralPrice(totalAmount) {
     const generalPrice = document.createElement('div')
     generalPrice.classList.add('basket-modal__general-price')
     const generalPriceNumber = document.createElement('span')
-    generalPriceNumber.textContent = 'Итого: 123$'
 
+    let USDollar = new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD',
+    })
+
+    generalPriceNumber.textContent = `Итого: ${USDollar.format(totalAmount)}`
     generalPrice.append(generalPriceNumber)
+    
     return generalPrice
+}
+
+export function countGeneralPrice() {
+    const itemPrices = document.querySelectorAll('.basket-modal__items .basket-item__price')
+    console.log(itemPrices.textContent)
+    let totalAmount = 0
+    itemPrices.forEach(price => {
+        console.log(itemPrices.textContent)
+    } )
+
+    return totalAmount
 }
 
 function init() {
