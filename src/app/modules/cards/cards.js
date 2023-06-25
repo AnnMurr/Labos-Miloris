@@ -1,6 +1,7 @@
 import { CardsApi } from "../../core/API/cards-api"
 import { hiddenCards } from "../../core/utils/show-more"
 import { addToBasketStore } from "../basket/basket.js"
+import { USDollar } from "../../core/consts/keys"
 
 const cardsWrapper = document.querySelector('.cards__wrapper')
 const cardsInner = document.querySelector('.cards__inner')
@@ -14,11 +15,11 @@ const sourceFunctions = {
 
 function filterCards() {
     if (source && sourceFunctions.hasOwnProperty(source)) {
-        const getCardsFunction = sourceFunctions[source];
-        getElements(getCardsFunction());
-        localStorage.removeItem('source');
+        const getCardsFunction = sourceFunctions[source]
+        getElements(getCardsFunction())
+        localStorage.removeItem('source')
     } else {
-        getElements(CardsApi.getCards());
+        getElements(CardsApi.getCards())
     }
 }
 
@@ -26,21 +27,21 @@ async function getElements(dataCards) {
     let cards = await dataCards
 
     cards.forEach(element => {
-        createCard(element.url, element.tittle, element.price, element.id)
+        createCard(element.url, element.title, element.price, element.id)
     })
 
     createShowMoreBtn()
     hiddenCards()
 }
 
-export function createShowMoreBtn() {
+function createShowMoreBtn() {
     const showMoreBtn = document.createElement('button')
     showMoreBtn.classList.add('btn', 'cards__show-more')
     showMoreBtn.textContent = 'Показать больше'
     cardsWrapper.appendChild(showMoreBtn)
 }
 
-export function createCard(url, title, price, id) {
+function createCard(url, title, price, id) {
     const card = document.createElement('div')
     card.classList.add('card')
     card.id = id
@@ -68,10 +69,10 @@ function createContentWrapper(title, price) {
     return contentWrapper
 }
 
-function createCardInfo(tittleText, PriceText) {
+function createCardInfo(title, price) {
     const cardInfo = document.createElement('div')
     cardInfo.classList.add('card__info')
-    cardInfo.append(createCardInfoTittle(tittleText), createCardInfoPrice(PriceText), createBtnToBasket())
+    cardInfo.append(createCardInfoTittle(title), createCardInfoPrice(price), createBtnToBasket())
 
     return cardInfo
 }
@@ -90,7 +91,7 @@ function createCardInfoPrice(PriceText) {
     const cardInfoPrice = document.createElement('div')
     cardInfoPrice.classList.add('card__price')
     const cardInfoPriceText = document.createElement('span')
-    cardInfoPriceText.textContent = `${PriceText} $`
+    cardInfoPriceText.textContent = `${USDollar.format(PriceText)}`
     cardInfoPrice.append(cardInfoPriceText)
 
     return cardInfoPrice

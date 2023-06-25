@@ -1,5 +1,6 @@
 import { closeBusketModalByBtnCross } from "./basket-close"
-import { deleteItem, deliteAllItems } from "./basket"
+import { deleteItem, deliteAllItems, changeItemCount } from "./basket"
+import { USDollar } from "../../core/consts/keys"
 
 const busketModal = document.querySelector('.basket-modal')
 
@@ -24,7 +25,7 @@ function createBasketModalHeader() {
     return modalHeader
 }
 
-export function createBasketItemsWrapper() {
+function createBasketItemsWrapper() {
     const itemsWrapper = document.createElement('div')
     itemsWrapper.classList.add('basket-modal__items')
     itemsWrapper.addEventListener('click', deleteItem)
@@ -32,7 +33,7 @@ export function createBasketItemsWrapper() {
     return itemsWrapper
 }
 
-export function createBasketItem(element) {
+function createBasketItem(element) {
     const item = document.createElement('div')
     item.classList.add('basket-item')
     item.id = element.id
@@ -69,6 +70,9 @@ function createBasketItemCount(element) {
     itemCountPlus.classList.add('basket-item-plus')
     itemCountPlus.textContent = '+'
 
+    itemCountPlus.addEventListener('click', changeItemCount)
+    itemCountMinus.addEventListener('click',changeItemCount)
+
     itemCount.append(itemCountMinus, itemCountQuantity, itemCountPlus)
     return itemCount
 }
@@ -77,7 +81,7 @@ function createBasketItemPrice(element) {
     const itemPrice = document.createElement('div')
     itemPrice.classList.add('basket-item__price')
     const itemPriceText = document.createElement('span')
-    itemPriceText.textContent = `${element.price} $`
+    itemPriceText.textContent = `${USDollar.format(element.price)}`
 
     itemPrice.append(itemPriceText)
     return itemPrice
@@ -90,16 +94,14 @@ function createBasketItemCross() {
     return cross
 }
 
-export function createBasketModalFooter() {
+function createBasketModalFooter() {
     const basketModalFooter = document.createElement('div')
     basketModalFooter.classList.add('basket-modal__footer')
-    basketModalFooter.style.display = 'none'
 
-    
     return basketModalFooter
 }
  
-export function createBasketModalFooterBtns() {
+function createBasketModalFooterBtns() {
     const btnsWrapper = document.createElement('div')
     btnsWrapper.classList.add('basket-modal__buttons')
 
@@ -119,15 +121,10 @@ export function createBasketModalFooterBtns() {
     return btnsWrapper
 }
 
-export function createBasketGeneralPrice(totalAmount) {
+function createBasketGeneralPrice(totalAmount) {
     const generalPrice = document.createElement('div')
     generalPrice.classList.add('basket-modal__general-price')
     const generalPriceNumber = document.createElement('span')
-
-    let USDollar = new Intl.NumberFormat('en-US', {
-        style: 'currency',
-        currency: 'USD',
-    })
 
     generalPriceNumber.textContent = `Итого: ${USDollar.format(totalAmount)}`
     generalPrice.append(generalPriceNumber)
@@ -135,19 +132,10 @@ export function createBasketGeneralPrice(totalAmount) {
     return generalPrice
 }
 
-export function countGeneralPrice() {
-    const itemPrices = document.querySelectorAll('.basket-modal__items .basket-item__price')
-    console.log(itemPrices.textContent)
-    let totalAmount = 0
-    itemPrices.forEach(price => {
-        console.log(itemPrices.textContent)
-    } )
-
-    return totalAmount
-}
-
 function init() {
     createBasketModal()
 }
 
 document.addEventListener('DOMContentLoaded', init)
+
+export { createBasketItem, createBasketModalFooterBtns, createBasketGeneralPrice }

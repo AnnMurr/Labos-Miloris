@@ -1,9 +1,7 @@
 import { CardsApi } from "../../core/API/cards-api"
 import { setCardToStore, getBasketStore } from "../../stores/basket-store"
-import { createBasketItem } from "./create-basket-modal"
-import { createBasketModalFooterBtns } from "./create-basket-modal"
-import { createBasketModalFooter } from "./create-basket-modal"
-import { createBasketGeneralPrice } from "./create-basket-modal"
+import { createBasketItem, createBasketModalFooterBtns, createBasketGeneralPrice } from "./create-basket-modal"
+import { USDollar } from "../../core/consts/keys"
 
 const basketBtn = document.querySelector('.basket')
 const basketModal = document.querySelector('.basket-modal')
@@ -13,10 +11,11 @@ basketBtn.addEventListener('click', addItemElements)
 function basketStoreData() {
     const basketStore = getBasketStore()
     const cardList = JSON.parse(basketStore) || []
+
     return cardList
 }
 
- function countGeneralPrice() {
+function countGeneralPrice() {
     const basketStore = basketStoreData()
     let totalAmount = 0
 
@@ -25,22 +24,74 @@ function basketStoreData() {
     return totalAmount
 }
 
+function changeGeneralPrice() {
+    const generalPrice = document.querySelector('.basket-modal__general-price span')
+    generalPrice.textContent = `Итого: ${USDollar.format(countGeneralPrice())}`
+}
+
 function addItemElements() {
     const basketStore = basketStoreData()
     const itemsWrapper = document.querySelector('.basket-modal .basket-modal__items')
     const basketModalFooter = document.querySelector('.basket-modal__footer')
-    const totalAmount = countGeneralPrice() 
-
-    
+    const totalAmount = countGeneralPrice()
 
     if (basketModal.classList.contains('basket-modal_active')) {
         basketStore.forEach(element => {
             itemsWrapper.append(createBasketItem(element))
         })
-        basketModalFooter.append(createBasketModalFooterBtns(), createBasketGeneralPrice(totalAmount))
 
+        basketModalFooter.append(createBasketModalFooterBtns(), createBasketGeneralPrice(totalAmount))
         deliteBasketFooter()
-    } 
+    }
+}
+
+async function changeItemCount(event) {
+    const cardsFromApi = await CardsApi.getCards()
+    const item = event.target.parentNode.parentNode
+    const elementPrice = item.querySelector('.basket-item__price')
+    const basketStore = basketStoreData()
+    const existingItem = basketStore.find(element => element.id === item.id)
+    const cardModel = cardsFromApi.find(element => element.id === item.id)
+    let newBasketStore = basketStore
+
+    if (existingItem) {
+
+        if (event.target.classList.contains('basket-item-minus')) {
+
+            if (Number(existingItem.quantity) === 1) {
+                newBasketStore = basketStore.filter(element => element.id !== existingItem.id)
+                item.remove()
+
+                if (newBasketStore.length === 0) {
+                    deliteBasketFooter()
+                }
+
+            } else {
+                changeQuantity(existingItem, cardModel, '-')
+                changeQuantityText(event.target, existingItem, elementPrice)
+            }
+
+        } else {
+            changeQuantity(existingItem, cardModel, '+')
+            changeQuantityText(event.target, existingItem, elementPrice)
+        }
+    }
+
+    setCardToStore(newBasketStore);
+    changeGeneralPrice()
+}
+
+function changeQuantityText(eventTarget, existingItem, elementPrice) {
+    const countContent = eventTarget.classList.contains('basket-item-minus') ? eventTarget.nextElementSibling : eventTarget.previousElementSibling
+    countContent.textContent = existingItem.quantity
+    elementPrice.textContent = `${USDollar.format(existingItem.price)}`
+}
+
+function changeQuantity(existingItem, cardModel, operationSymbol) {
+    existingItem.quantity = operationSymbol === '-' ? (Number(existingItem.quantity) - 1).toString() : (Number(existingItem.quantity) + 1).toString()
+    existingItem.price = operationSymbol === '-' ? (Number(existingItem.price) - Number(cardModel.price)).toString() : (Number(existingItem.price) + Number(cardModel.price)).toString()
+
+    return existingItem.quantity && existingItem.price
 }
 
 async function addToBasketStore(event) {
@@ -55,8 +106,7 @@ async function addToBasketStore(event) {
         const existingItem = newBasketStore.find(item => item.id === elementId)
 
         if (existingItem) {
-            existingItem.quantity = (Number(existingItem.quantity) + 1).toString()
-            existingItem.price = (Number(existingItem.price) + Number(cardModel.price)).toString()
+            changeQuantity(existingItem, cardModel, '+')
         } else {
 
             newBasketStore.push(cardModel)
@@ -77,6 +127,7 @@ function deleteItem(event) {
     if (event.target.classList.contains('cross')) {
         basketItem.remove()
         deliteBasketFooter()
+        changeGeneralPrice()
     }
 }
 
@@ -92,7 +143,7 @@ function deliteBasketFooter() {
     const itemsWrapper = document.querySelector('.basket-modal .basket-modal__items')
     const basketItem = document.querySelector('.basket-item')
 
-    if(basketItem) {
+    if (basketItem) {
         basketModalFooter.style.display = 'flex'
     } else {
         basketModalFooter.style.display = 'none'
@@ -100,4 +151,4 @@ function deliteBasketFooter() {
     }
 }
 
-export { addToBasketStore, deleteItem, deliteAllItems }
+export { addToBasketStore, deleteItem, deliteAllItems, changeItemCount }
