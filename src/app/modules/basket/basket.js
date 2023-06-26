@@ -45,8 +45,14 @@ function addItemElements() {
     }
 }
 
-async function changeItemCount(event) {
-    const cardsFromApi = await CardsApi.getCards()
+let cardsFromApi 
+
+async function getcardsFromApi() {
+    cardsFromApi = await CardsApi.getCards()
+    return cardsFromApi
+}
+
+ function changeItemCount(event) {
     const item = event.target.parentNode.parentNode
     const elementPrice = item.querySelector('.basket-item__price')
     const basketStore = basketStoreData()
@@ -88,9 +94,9 @@ function changeQuantityText(eventTarget, existingItem, elementPrice) {
 }
 
 function changeQuantity(existingItem, cardModel, operationSymbol) {
-    existingItem.quantity = operationSymbol === '-' ? (Number(existingItem.quantity) - 1).toString() : (Number(existingItem.quantity) + 1).toString()
-    existingItem.price = operationSymbol === '-' ? (Number(existingItem.price) - Number(cardModel.price)).toString() : (Number(existingItem.price) + Number(cardModel.price)).toString()
-
+    let isMinus = operationSymbol === '-'
+    existingItem.quantity = (isMinus? Number(existingItem.quantity) - 1 : Number(existingItem.quantity) + 1).toString()
+    existingItem.price = (isMinus? Number(existingItem.price) - Number(cardModel.price): Number(existingItem.price) + Number(cardModel.price)).toString()
     return existingItem.quantity && existingItem.price
 }
 
@@ -152,3 +158,5 @@ function deliteBasketFooter() {
 }
 
 export { addToBasketStore, deleteItem, deliteAllItems, changeItemCount }
+
+document.addEventListener('DOMContentLoaded', getcardsFromApi)
