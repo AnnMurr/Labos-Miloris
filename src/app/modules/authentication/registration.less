@@ -1,0 +1,92 @@
+.registrtation {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: @color-black;
+    justify-content: center;
+    align-items: center;
+    display: none;
+
+    &_active {
+        display: flex;
+    }
+
+    &__wrapper {
+        display: flex;
+        width: 100%;
+        max-width: 910px;
+    }
+
+    &__form {
+        display: flex;
+        flex-direction: column;
+        max-width: 460px;
+        width: 100%;
+        background-color: @color-white;
+        padding: 40px;
+
+        @media screen and (@max576) {
+            margin: 0 auto;
+        }
+
+        @media screen and (@max320) {
+            padding: 10px;
+        }
+    }
+
+    &__input {
+        padding: 10px;
+        margin-bottom: 20px;
+        border-top: none;
+        border-left: none;
+        border-right: none;
+        border-bottom: 1px solid @color-black-05;
+
+        &::placeholder {
+            font-size: 14px;
+            font-family: @sub-font;
+        }
+    }
+
+    &__image-inner {
+        background-image: url('../../../media/images/form-image.webp');
+        max-width: 460px;
+        width: 100%;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        position: relative;
+
+        &::before {
+            content: "";
+            width: 100%;
+            height: 100%;
+            background-color: @color-black-05;
+            position: absolute;
+        }
+
+        @media screen and (@max576) {
+            display: none;
+        }
+    }
+
+    &__button {
+        height: 50px;
+        max-width: 100%;
+        background-color: black;
+        border-radius: 3px;
+        margin-top: 40px;
+    }
+}
+
+.datalist {
+    width: 100%;
+    background-color: @color-white;
+}

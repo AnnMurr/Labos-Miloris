@@ -5,8 +5,14 @@ import { USDollar } from "../../core/consts/keys"
 
 const basketBtn = document.querySelector('.basket')
 const basketModal = document.querySelector('.basket-modal')
+let cardsFromApi 
 
 basketBtn.addEventListener('click', addItemElements)
+
+async function getcardsFromApi() {
+    cardsFromApi = await CardsApi.getCards()
+    return cardsFromApi
+}
 
 function basketStoreData() {
     const basketStore = getBasketStore()
@@ -45,13 +51,6 @@ function addItemElements() {
     }
 }
 
-let cardsFromApi 
-
-async function getcardsFromApi() {
-    cardsFromApi = await CardsApi.getCards()
-    return cardsFromApi
-}
-
  function changeItemCount(event) {
     const item = event.target.parentNode.parentNode
     const elementPrice = item.querySelector('.basket-item__price')
@@ -83,7 +82,7 @@ async function getcardsFromApi() {
         }
     }
 
-    setCardToStore(newBasketStore);
+    setCardToStore(newBasketStore)
     changeGeneralPrice()
 }
 
@@ -100,8 +99,7 @@ function changeQuantity(existingItem, cardModel, operationSymbol) {
     return existingItem.quantity && existingItem.price
 }
 
-async function addToBasketStore(event) {
-    const cardsFromApi = await CardsApi.getCards()
+function addToBasketStore(event) {
     const basketStore = basketStoreData()
     const elementId = event.target.parentNode.parentNode.parentNode.id
     let newBasketStore = []
@@ -157,6 +155,10 @@ function deliteBasketFooter() {
     }
 }
 
+function init() {
+    getcardsFromApi()
+}
+
 export { addToBasketStore, deleteItem, deliteAllItems, changeItemCount }
 
-document.addEventListener('DOMContentLoaded', getcardsFromApi)
+document.addEventListener('DOMContentLoaded', init)

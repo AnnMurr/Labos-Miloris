@@ -20,7 +20,7 @@
                 <nav class="header__nav">
                     <ul class="header__menu">
                         <li>
-                            <a href="#">Главная</a>
+                            <a href="./index.html">Главная</a>
                         </li>
                         <li>
                             <a href="./pages/about-perfume.html">О парфюмерии</a>
@@ -237,14 +237,16 @@
                         <button type="button" class="authentication__sing-up">Регистрация</button>
                     </div>
                     <form class="form">
-                        <input required type="text" placeholder="Номер тел./ адрес эл.почты">
-                        <input required type="text" placeholder="Пароль">
-                        <button class="btn">Войти</button>
+                        <input required autocomplete="email" type="email" placeholder="адрес эл.почты">
+                        <input required autocomplete="current-password" type="password" placeholder="Пароль">
+                        <button type="submit" class="btn">Войти</button>
                     </form>
                 </div>
+                <div class="registrtation"></div>
             </div>
         </div>
     </footer>
+    <a href="#" class="btnUp"></a>
 
     <script type="module" src="./src/app/index.js"></script>
     <script type="module" src="./src/app/core/utils/filter-catalog.js"></script>
