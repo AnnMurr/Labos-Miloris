@@ -30,6 +30,18 @@ export const FORM_ELEMENTS = [
         attributes: [{ type: 'password' }, { placeholder: 'Пароль' }, { required: true }]
     },
     {
+        tag: 'input',
+        id: 'registrtation__checkbox',
+        class: ['registrtation__checkbox'],
+        attributes: [{ type: 'checkbox' }, { required: true }]
+    },
+    {
+        tag: 'a',
+        class: ['registrtation__label'],
+        content: 'Согласен с политикой конфиденциальности',
+        attributes: [{ href: './privacy-policy.html' }]
+    },
+    {
         tag: 'button',
         class: ['btn', 'registrtation__button'],
         content: 'Зарегистрироваться',
