@@ -1,7 +1,7 @@
-class AuthenticationApi {
+export class AuthenticationApi {
     static userUrl = 'https://64901aaa1e6aa71680ca93bb.mockapi.io/user'
 
-    static setUserData() {
+    static setUserData(login, password, token, city, name, date) {
         return new Promise((resolve, reject) => {
             fetch(this.userUrl, {
                 method: 'POST',
@@ -13,18 +13,27 @@ class AuthenticationApi {
                     password: password,
                     token: token,
                     city: city,
-                    userName: userName,
+                    name: name,
+                    date: date,
                     orders: []
                 })
             })
-            .then(response => {
-                if(response.ok) {
-                    resolve()
-                } else {
-                    reject()
-                }
-            })
-            .catch(error => {throw error})
-        }) 
+                .then(response => {
+                    if (response.ok) {
+                        resolve()
+                    } else {
+                        reject()
+                    }
+                })
+                .catch(error => { throw error })
+        })
+    }
+
+    static getUserLogin(userLogin) {
+        return fetch(this.userUrl)
+            .then(response => response.json())
+            .then(data => data.find(element => element.login === userLogin))
+
+            .catch(error => { throw error })
     }
 }

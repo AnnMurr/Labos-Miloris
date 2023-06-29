@@ -40,11 +40,15 @@
 
     &__input {
         padding: 10px;
-        margin-bottom: 20px;
+        margin-top: 20px;
         border-top: none;
         border-left: none;
         border-right: none;
         border-bottom: 1px solid @color-black-05;
+
+        &:first-child {
+            margin-top: 0;
+        }
 
         &::placeholder {
             font-size: 14px;
@@ -98,10 +102,7 @@
     &__checkbox {
         width: fit-content;
         cursor: pointer;
-    }
-
-    input[type=checkbox]:checked {
-        background-color: black;
+        margin: 20px 0 3px 0;
     }
 }
 

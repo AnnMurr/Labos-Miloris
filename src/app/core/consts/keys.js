@@ -1,6 +1,10 @@
-export const BASKET = 'basket'
+const BASKET = 'basket'
 
-export let USDollar = new Intl.NumberFormat('en-US', {
+let USDollar = new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency: 'USD',
 })
+
+const CITIES = ['Минск', 'Витебск', 'Брест', 'Гродно', 'Гомель', 'Могилев']
+
+export { BASKET, USDollar, CITIES }
