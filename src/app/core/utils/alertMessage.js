@@ -13,24 +13,21 @@ function addAlert(type, text, icon) {
     alertWrapper.append(alertText, alertLine)
     alert.append(alertWrapper)
 
-    const showLine = () => alertLine.style.width = "100%";
+    const showLine = () => alertLine.style.width = "100%"
 
-    const hideLine = () => alertLine.style.width = "0";
+    setTimeout(() => showLine(), 100)
 
-
-    setTimeout(() => showLine(), 100);
-
-    setTimeout(() => alertWrapper.remove(), 4000000)
+    setTimeout(() => alertWrapper.remove(), 4000)
 }
 
 export class AlertService {
     static error(text) {
-        addAlert("error", text, '\u274C');
+        addAlert("error", text, '\u274C')
     }
     static warning(text) {
-        addAlert("warning", text, '⚠️');
+        addAlert("warning", text, '⚠️')
     }
     static success(text) {
-        addAlert("success", text, '✅');
+        addAlert("success", text, '✅')
     }
 }
