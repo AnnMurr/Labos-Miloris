@@ -3,19 +3,14 @@ import { createFormElement } from "../../core/utils/authentication/create-form"
 import { ErrorMessageHandler } from "../../core/helpers/messageClass"
 import { AuthenticationApi } from "../../core/API/Authentication-api"
 import { RegistrationKeys } from "../../core/consts/registration-keys"
-import { CheckConditionRegistration } from "../../core/helpers/check-condition"
+import { AlertService } from "../../core/utils/alertMessage"
 
+const registrationBtn = document.querySelector('.authentication__sing-up')
+const registration = document.querySelector('.registration')
 
-const registrtationBtn = document.querySelector('.authentication__sing-up')
-const registrtation = document.querySelector('.registrtation')
-
-registrtationBtn.addEventListener('click', function () {
-
-    if (!registrtation.classList.contains('registrtation_active')) {
-        registrtation.classList.add('registrtation_active')
-    } else {
-        registrtation.classList.remove('registrtation_active')
-    }
+registrationBtn.addEventListener('click', function () {
+    const registrationClassActive = 'registration_active'
+    !registration.classList.contains(registrationClassActive) ?  registration.classList.add(registrationClassActive) : registration.classList.remove(registrationClassActive)
 })
 
 export function createDataList(dataList) {
@@ -26,22 +21,23 @@ export function createDataList(dataList) {
     })
 }
 
-function createRegistrtationWrapper() {
-    const registrtationWrapper = document.createElement('div')
-    registrtationWrapper.classList.add('registrtation__wrapper')
-    registrtationWrapper.append(createFormImage(), createForm())
-    registrtation.append(registrtationWrapper)
-    registrtationWrapper.querySelector('.registrtation__label').addEventListener('click', checgeAtribute)
-    document.querySelector('.registrtation__button').addEventListener('click', submitForm)
+function createregistrationWrapper() {
+    const registrationWrapper = document.createElement('div')
+    registrationWrapper.classList.add('registration__wrapper')
+    registrationWrapper.append(createFormImage(), createForm())
+    registration.append(registrationWrapper)
+    registrationWrapper.querySelector('.registration__label').addEventListener('click', checgeAtribute)
+    document.querySelector('.registration__button').addEventListener('click', submitForm)
 }
 
 function submitForm(event) {
-    registration()
+    event.preventDefault()
+    registrationProcessing()
 }
 
 function createForm() {
     const form = document.createElement('form')
-    form.classList.add('registrtation__form')
+    form.classList.add('registration__form')
     createFormElement(form)
 
     return form
@@ -49,20 +45,15 @@ function createForm() {
 
 function createFormImage() {
     const formImageInner = document.createElement('div')
-    formImageInner.classList.add('registrtation__image-inner')
+    formImageInner.classList.add('registration__image-inner')
 
     return formImageInner
 }
 
 function checgeAtribute() {
-    const label = document.querySelector('.registrtation__label')
+    const label = document.querySelector('.registration__label')
     const pageHref = window.location.href
-
-    if (pageHref === 'http://localhost:1234/index.html') {
-        label.href = ('href', './pages/privacy-policy.html')
-    } else {
-        label.href = ('href', './privacy-policy.html')
-    }
+    label.href = ('href', pageHref === 'http://localhost:1234/index.html' ? './pages/privacy-policy.html' : './privacy-policy.html')
 }
 
 function resetErrorMessage() {
@@ -88,20 +79,20 @@ function showPassword() {
 
     btns.forEach(btn => {
         btn.addEventListener('click', function (event) {
-            let input = event.target.getAttribute('data-btn') === '1' ? inputPassword : inputRepeatPassword
-            let neededType = input.type === 'password' ? 'text' : 'password'
-            input.type = neededType
-            let btn = event.target.getAttribute('data-btn') === '1' ? btnShow1 : btnShow2
-            btn.classList.contains('btn-show-password_show') ? btn.classList.remove('btn-show-password_show') : btn.classList.add('btn-show-password_show')
-
+            const btnShowPasswordShow = 'btn-show-password_show'
+            let doesContainsDataBnt1 = event.target.getAttribute('data-btn') === '1'
+            let input = doesContainsDataBnt1 ? inputPassword : inputRepeatPassword
+            input.type = input.type === 'password' ? 'text' : 'password'
+            let btn = doesContainsDataBnt1 ? btnShow1 : btnShow2
+            btn.classList.contains(btnShowPasswordShow) ? btn.classList.remove(btnShowPasswordShow) : btn.classList.add(btnShowPasswordShow)
         })
     })
 }
 
-async function registration() {
+async function registrationProcessing() {
     resetErrorMessage()
 
-    const inputs = Array.from(document.querySelectorAll('.registrtation__input'))
+    const inputs = Array.from(document.querySelectorAll('.registration__input'))
     let values = inputs.map(element => element.value)
     const [city, name, date, email, password, secondPassword] = values
     const errorMessageCity = document.getElementById('error-city')
@@ -110,31 +101,44 @@ async function registration() {
     const errorMessagePasswords = document.querySelector('[data-password="password"]')
     const userLogin = await AuthenticationApi.getUserLogin(email)
 
-    if (!CheckConditionRegistration.checkWidthIncludes(CITIES, city)) {
-        ErrorMessageHandler.errorMessageAnotherCity(errorMessageCity)
-    } else if (CheckConditionRegistration.checkWidthIncludes(name, " ")) {
-        ErrorMessageHandler.errorMessageSpaces(errorMessageName)
-    } else if (CheckConditionRegistration.checkWidthIncludes(email, " ")) {
-        ErrorMessageHandler.errorMessageSpaces(errorMessageEmail)
-    } else if (CheckConditionRegistration.checkWidthIncludes(password, " ")) {
-        ErrorMessageHandler.errorMessageSpaces(errorMessagePasswords)
-    } else if (CheckConditionRegistration.checkMaxLength(name, RegistrationKeys.maxNumberOfLettersName) || CheckConditionRegistration.checkWidthMatch(name, RegistrationKeys.specialSymbolsArray)) {
+    const checkInputsValue = () => {
+        const emptyInputs =  inputs.filter(element => !element.value)
+       let emptyInputsErrorMessage 
+       emptyInputs.forEach(empElem => {
+            console.log(document.querySelector('> .error-message'))
+
+       })
+        console.log(emptyInputs)
+    }
+        
+    checkInputsValue()
+
+    if (!CITIES.includes(city)) {
+        ErrorMessageHandler.setErrorMessage(errorMessageCity, ErrorMessageHandler.chooseAnotherCity)
+    } else if (name.includes(' ')) {
+        ErrorMessageHandler.setErrorMessage(errorMessageName, ErrorMessageHandler.whiteSpace)
+    } else if (email.includes(' ')) {
+        ErrorMessageHandler.setErrorMessage(errorMessageEmail, ErrorMessageHandler.whiteSpace)
+    } else if (password.includes(' ')) {
+        ErrorMessageHandler.setErrorMessage(errorMessagePasswords, ErrorMessageHandler.whiteSpace)
+    } else if (name.length > RegistrationKeys.maxNumberOfLettersName || name.match(RegistrationKeys.specialSymbolsArray)) {
         ErrorMessageHandler.errorMessageMaxQuantity(errorMessageName, RegistrationKeys.maxNumberOfLettersName, RegistrationKeys.specialSymbols)
-    } else if (CheckConditionRegistration.checkMaxLength(email, RegistrationKeys.maxNumberOfLettersEmail) ) {
+    } else if (email.length > RegistrationKeys.maxNumberOfLettersEmail) {
         ErrorMessageHandler.errorMessageMaxQuantity(errorMessageEmail, RegistrationKeys.maxNumberOfLettersEmail)
     } else if (userLogin) {
         ErrorMessageHandler.errorMessageExistingLogin(errorMessageEmail, email)
-    } else if (CheckConditionRegistration.checEquality(password, secondPassword)) {
-        ErrorMessageHandler.errorMessageDifferentPassword(errorMessagePasswords)
-    } else if (CheckConditionRegistration.checkMinLength(password, RegistrationKeys.minNumberOfLettersPasswords) ||  !CheckConditionRegistration.checkWidthMatch(password, /[A-Z]/)) {
-        ErrorMessageHandler.errorMessageContainsPassword(errorMessagePasswords)
+    } else if (password !== secondPassword) {
+        ErrorMessageHandler.setErrorMessage(errorMessagePasswords, ErrorMessageHandler.passwordDossNotMatch)
+    } else if (password.length < RegistrationKeys.minNumberOfLettersPasswords ||  !password.match(/[A-ZА-Я]/i)) {
+        ErrorMessageHandler.setErrorMessage(errorMessagePasswords, ErrorMessageHandler.passwordIncorrectLength)
     } else {
         AuthenticationApi.setUserData(email, password, RegistrationKeys.token, city, name, date)
+        AlertService.error(RegistrationKeys.successRegistration)
     }
 }
 
 function init() {
-    createRegistrtationWrapper()
+    createregistrationWrapper()
     showPassword()
 }
 

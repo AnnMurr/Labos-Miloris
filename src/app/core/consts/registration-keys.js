@@ -10,4 +10,6 @@ export class RegistrationKeys {
     static minNumberOfLettersPasswords = 6
 
     static token = Math.random() * new Date
+
+    static successRegistration = 'Регистрация прошла успешно'
 }

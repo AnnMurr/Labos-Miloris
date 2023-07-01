@@ -1,9 +1,9 @@
 export const FORM_ELEMENTS = [
     {
         tag: 'input',
-        class: 'registrtation__input',
+        class: 'registration__input',
         id: 'city',
-        attributes: [{ type: 'text' }, { placeholder: 'Город' }, { list: 'city-list' }, { required: true }, { autocomplete: 'address-level2' }]
+        attributes: [{ type: 'text' }, { placeholder: 'Город' }, { list: 'city-list' }, { autocomplete: 'address-level2' }]
     },
     {
         tag: 'datalist',
@@ -16,8 +16,8 @@ export const FORM_ELEMENTS = [
     },
     {
         tag: 'input',
-        class: 'registrtation__input',
-        attributes: [{ type: 'text' }, { placeholder: 'Имя' }, { required: true }, { autocomplete: "given-name" }]
+        class: 'registration__input',
+        attributes: [{ type: 'text' }, { placeholder: 'Имя' }, { autocomplete: "given-name" }]
     },
     {
         tag: 'span',
@@ -27,8 +27,8 @@ export const FORM_ELEMENTS = [
     {
         tag: 'input',
         id: "birthday",
-        class: 'registrtation__input',
-        attributes: [{ type: 'date' }, { placeholder: 'Дата рождения' }, { required: true }, { autocomplete: "bday" }, { name: "trip-start" }, { min: "1900-01-01" }]
+        class: 'registration__input',
+        attributes: [{ type: 'date' }, { placeholder: 'Дата рождения' }, { autocomplete: "bday" }, { name: "trip-start" }, { min: "1900-01-01" }]
     },
     {
         tag: 'span',
@@ -37,8 +37,8 @@ export const FORM_ELEMENTS = [
     },
     {
         tag: 'input',
-        class: 'registrtation__input',
-        attributes: [{ type: 'email' }, { placeholder: 'Почта' }, { required: true }, { autocomplete: "email" }]
+        class: 'registration__input',
+        attributes: [{ type: 'email' }, { placeholder: 'Почта' }, { autocomplete: "email" }]
     },
     {
         tag: 'span',
@@ -47,8 +47,8 @@ export const FORM_ELEMENTS = [
     },
     {
         tag: 'input',
-        class: 'registrtation__input',
-        attributes: [{ type: 'password' }, { placeholder: 'Пароль' }, { required: true }, { autocomplete: "current-password" }, { 'data-password': '1' }]
+        class: 'registration__input',
+        attributes: [{ type: 'password' }, { placeholder: 'Пароль' }, { autocomplete: "current-password" }, { 'data-password': '1' }]
     },
     {
         tag: 'button',
@@ -64,8 +64,8 @@ export const FORM_ELEMENTS = [
     },
     {
         tag: 'input',
-        class: 'registrtation__input',
-        attributes: [{ type: 'password' }, { placeholder: 'Введите пароль еще раз' }, { required: true }, { autocomplete: "current-password" }, { 'data-password': '2' }]
+        class: 'registration__input',
+        attributes: [{ type: 'password' }, { placeholder: 'Введите пароль еще раз' }, { autocomplete: "current-password" }, { 'data-password': '2' }]
     },
     {
         tag: 'button',
@@ -80,18 +80,18 @@ export const FORM_ELEMENTS = [
     },
     {
         tag: 'input',
-        id: 'registrtation__checkbox',
-        class: ['registrtation__checkbox'],
-        attributes: [{ type: 'checkbox' }, { required: true }]
+        id: 'registration__checkbox',
+        class: ['registration__checkbox'],
+        attributes: [{ type: 'checkbox' }]
     },
     {
         tag: 'a',
-        class: ['registrtation__label'],
+        class: ['registration__label'],
         content: 'Согласен с политикой конфиденциальности',
     },
     {
         tag: 'button',
-        class: ['btn', 'registrtation__button'],
+        class: ['btn', 'registration__button'],
         content: 'Зарегистрироваться',
         attributes: [{ type: 'submit' }]
     }
