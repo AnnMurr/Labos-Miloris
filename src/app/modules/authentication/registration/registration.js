@@ -1,9 +1,11 @@
-import { CITIES } from "../../core/consts/keys"
-import { createFormElement } from "../../core/utils/authentication/create-form"
-import { ErrorMessageHandler } from "../../core/helpers/messageClass"
-import { AuthenticationApi } from "../../core/API/Authentication-api"
-import { RegistrationKeys } from "../../core/consts/registration-keys"
-import { AlertService } from "../../core/utils/alertMessage"
+import { CITIES } from "../../../core/consts/keys.js"
+import { createFormElement } from "../../../core/utils/authentication/create-form.js"
+import { ErrorMessageHandler } from "../../../core/helpers/messageClass.js"
+import { AuthenticationApi } from "../../../core/API/Authentication-api.js"
+import { RegistrationKeys } from "../../../core/consts/registration-keys.js"
+import { AlertService } from "../../../core/utils/alertMessage.js"
+import { UserStore } from "../../../stores/userStore.js"
+import { checkToken } from "../../user/user.js"
 
 const registrationBtn = document.querySelector('.authentication__sing-up')
 const registration = document.querySelector('.registration')
@@ -80,19 +82,7 @@ function showPassword() {
     })
 }
 
-async function registrationProcessing() {
-    resetErrorMessage()
-
-    const inputs = Array.from(document.querySelectorAll('.registration__input'))
-    let values = inputs.map(element => element.value)
-    const [city, name, date, email, password, secondPassword] = values
-    const errorMessageCity = document.getElementById('error-city')
-    const errorMessageName = document.getElementById('error-name')
-    const errorMessageEmail = document.getElementById('error-email')
-    const errorMessagePasswords = document.querySelector('[data-error="password-1"]')
-    const userLogin = await AuthenticationApi.getUserLogin(email)
-
-    const checkEmptyInput = () => {
+    const checkEmptyInput = (inputs) => {
         let isEmpty = []
         inputs.forEach(input => {
             let dataInput = input.getAttribute('data-input')
@@ -111,8 +101,20 @@ async function registrationProcessing() {
         return isEmpty;
     }
 
-    if(checkEmptyInput().includes(false)){
-        checkEmptyInput()
+async function registrationProcessing() {
+    resetErrorMessage()
+
+    const inputs = Array.from(document.querySelectorAll('.registration__input'))
+    let values = inputs.map(element => element.value)
+    const [city, name, date, email, password, secondPassword] = values
+    const errorMessageCity = document.getElementById('error-city')
+    const errorMessageName = document.getElementById('error-name')
+    const errorMessageEmail = document.getElementById('error-email')
+    const errorMessagePasswords = document.querySelector('[data-error="password-1"]')
+    const userLogin = await AuthenticationApi.getUserLogin(email)
+
+    if(checkEmptyInput(inputs).includes(false)){
+        checkEmptyInput(inputs)
     } else if (!CITIES.includes(city)) {
         ErrorMessageHandler.setErrorMessage(errorMessageCity, ErrorMessageHandler.chooseAnotherCity)
     } else if (name.includes(' ')) {
@@ -134,10 +136,12 @@ async function registrationProcessing() {
     } else {
         AuthenticationApi.setUserData(email, password, RegistrationKeys.token, city, name, date)
         AlertService.success(RegistrationKeys.successRegistration)
+        UserStore.setUserToken(RegistrationKeys.token)
+        checkToken()
+        
+        setTimeout(() => location.reload(), 4000)
     }
 }
-
-
 
 function init() {
     createregistrationWrapper()

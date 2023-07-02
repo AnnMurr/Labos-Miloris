@@ -1,0 +1,33 @@
+.user {
+  width: 30px;
+  height: 30px;
+  margin-left: 20px;
+  cursor: pointer;
+  position: relative;
+
+  &__modal {
+    background-color: #000;
+    border: 2px solid #fff;
+    max-width: 256px;
+    width: 100%;
+    padding: 40px 15px;
+    position: absolute;
+    top: 80px;
+    right: 0;
+    display: none;
+
+    &_active {
+        display: block;
+    }
+  }
+
+  &__btn-exit {
+    background-color: #856802;
+    border-radius: 5px;
+    margin-top: 30px;
+    height: 40px;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 20px;
+  }
+}

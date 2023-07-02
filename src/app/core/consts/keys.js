@@ -1,4 +1,5 @@
 const BASKET = 'basket'
+const USER_TOKEN = 'User'
 
 let USDollar = new Intl.NumberFormat('en-US', {
     style: 'currency',
@@ -7,4 +8,4 @@ let USDollar = new Intl.NumberFormat('en-US', {
 
 const CITIES = ['Минск', 'Витебск', 'Брест', 'Гродно', 'Гомель', 'Могилев']
 
-export { BASKET, USDollar, CITIES }
+export { USER_TOKEN, BASKET, USDollar, CITIES }

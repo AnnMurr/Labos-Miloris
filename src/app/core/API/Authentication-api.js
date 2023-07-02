@@ -36,4 +36,12 @@ export class AuthenticationApi {
 
             .catch(error => { throw error })
     }
+
+    static getUserToken(userToken) {
+        return fetch(this.userUrl)
+            .then(response => response.json())
+            .then(data => data.find(element => element.token.toString() === userToken))
+
+            .catch(error => { throw error })
+    }
 }

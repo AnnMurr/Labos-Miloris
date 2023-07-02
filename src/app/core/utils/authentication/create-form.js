@@ -1,5 +1,5 @@
-import { FORM_ELEMENTS } from "../../consts/options"
-import { createDataList } from "../../../modules/authentication/registration"
+import { FORM_ELEMENTS } from "../../consts/options.js"
+import { createDataList } from "../../../modules/authentication/registration/registration.js"
 
 export function createFormElement(form) {
 
