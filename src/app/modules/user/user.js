@@ -1,6 +1,7 @@
 import { UserStore } from "../../stores/userStore"
 import { UserMessageHandler } from "../../core/helpers/userMessageClass"
 import { AuthenticationApi } from "../../core/API/Authentication-api"
+import { basketStoreData, setCardToStore } from "../../stores/basket-store"
 
 const user = document.querySelector('.user')
 const userModal = document.querySelector('.user__modal')
@@ -64,17 +65,26 @@ function createUserBtn(BtnText = UserMessageHandler.signOut) {
     return userBtnExit
 }
 
-function scrollToSignInAndExitFromAccount() {
+async function scrollToSignInAndExitFromAccount() {
     const token = UserStore.getUserToken()
+    const cardList = basketStoreData()
+    const userData = await AuthenticationApi.getUserToken(token)
 
     if (token) {
-        UserStore.removeUserToken()
-        location.reload()
+        AuthenticationApi.changeUserOrders(userData.token.toString(), cardList)
+        setTimeout(()=> signOut() ,1000)
+     
     } else {
         const authenticationBlock = document.getElementById('authentication')
         authenticationBlock.scrollIntoView({ behavior: 'smooth' })
         userModal.classList.remove('user__modal_active')
     }
+}
+
+function signOut() {
+    UserStore.removeUserToken()
+    setCardToStore([])    
+    location.reload()
 }
 
 document.addEventListener('DOMContentLoaded', checkToken)

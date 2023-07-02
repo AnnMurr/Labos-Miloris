@@ -1,7 +1,7 @@
 export class AuthenticationApi {
     static userUrl = 'https://64901aaa1e6aa71680ca93bb.mockapi.io/user'
 
-    static setUserData(login, password, token, city, name, date) {
+    static setUserData(login, password, token, city, name, date, orders) {
         return new Promise((resolve, reject) => {
             fetch(this.userUrl, {
                 method: 'POST',
@@ -15,7 +15,7 @@ export class AuthenticationApi {
                     city: city,
                     name: name,
                     date: date,
-                    orders: []
+                    orders: orders
                 })
             })
                 .then(response => {
@@ -27,6 +27,28 @@ export class AuthenticationApi {
                 })
                 .catch(error => { throw error })
         })
+    }
+
+    static async changeUserOrders(userToken, orders) {
+        const userData = await this.getUserToken(userToken)     
+        const userId = userData.id
+        userData.orders = orders
+
+        return fetch(`${this.userUrl}/${userId}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(userData)
+        })
+        .then(response => {
+            if (response.ok) {
+                return response.json()
+            } else {
+                throw new Error('Failed to change user data')
+            }
+        })
+        .catch(error => { throw error })
     }
 
     static getUserData(userLogin) {

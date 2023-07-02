@@ -2,6 +2,7 @@ import { AuthenticationApi } from "../../../core/API/Authentication-api"
 import { AlertService } from "../../../core/utils/alertMessage"
 import { UserStore } from "../../../stores/userStore"
 import { checkToken } from "../../user/user"
+import { setCardToStore } from "../../../stores/basket-store"
 
 const loginInput = document.querySelector('.signIn__input-login')
 const loginPassword = document.querySelector('.signIn__inputp-password')
@@ -9,6 +10,7 @@ const LoginBtn = document.querySelector('.authentication .form .btn')
 const loginForm = document.querySelector('.authentication .form')
 
 async function logIn() {
+    resetErrorMessage()
     const userDataApi = await AuthenticationApi.getUserData(loginInput.value)
     const errorMessageLogin = document.querySelector('[data-error-log="login"]')
     const errorMessagePassword = document.querySelector('[data-error-log="password"]')
@@ -25,7 +27,16 @@ async function logIn() {
         UserStore.setUserToken(userDataApi.token)
         checkToken()
         loginForm.reset()
+        resetErrorMessage()
+        setCardToStore(userDataApi.orders)
     }
+}
+
+function resetErrorMessage() {
+    const errorMessageLogin = document.querySelector('[data-error-log="login"]')
+    const errorMessagePassword = document.querySelector('[data-error-log="password"]')
+    errorMessageLogin.textContent = null
+    errorMessagePassword.textContent = null
 }
 
 function showPassword() {

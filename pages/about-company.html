@@ -163,16 +163,17 @@
                     <li><a href="mailto:Labos.Miloris@.ru">Labos.Miloris@.ru</a></li>
                     <li><a href="tel:+375259464422">+375259464422</a></li>
                 </ul>
-                <div class="authentication">
+                <div id="authentication" class="authentication">
                     <div class="authentication__choose">
-                        <button type="button" class="authentication__sing-in">Вход</button>
-                        <span>/</span>
                         <button type="button" class="authentication__sing-up">Регистрация</button>
                     </div>
                     <form class="form">
-                        <input required type="text" placeholder="Номер тел./ адрес эл.почты">
-                        <input required type="text" placeholder="Пароль">
-                        <button class="btn">Войти</button>
+                        <input class="signIn__input-login" required autocomplete="email" type="email" placeholder="адрес эл.почты" data-log-input="login">
+                        <span class="error-message" data-error-log="login"></span>
+                        <input class="signIn__inputp-password" required autocomplete="current-password" type="password" placeholder="Пароль" data-log-input="password">
+                        <button class="btn-show-password" type="button" data-password-log="password">&#x1F441</button>
+                        <span class="error-message" data-error-log="password"></span>
+                        <button type="submit" class="btn">Войти</button>
                     </form>
                 </div>
                 <div class="registration"></div>

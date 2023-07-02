@@ -6,6 +6,7 @@ import { RegistrationKeys } from "../../../core/consts/registration-keys.js"
 import { AlertService } from "../../../core/utils/alertMessage.js"
 import { UserStore } from "../../../stores/userStore.js"
 import { checkToken } from "../../user/user.js"
+import { basketStoreData } from "../../../stores/basket-store.js"
 
 const registrationBtn = document.querySelector('.authentication__sing-up')
 const registration = document.querySelector('.registration')
@@ -112,6 +113,8 @@ async function registrationProcessing() {
     const errorMessageEmail = document.getElementById('error-email')
     const errorMessagePasswords = document.querySelector('[data-error="password-1"]')
     const userLogin = await AuthenticationApi.getUserLogin(email)
+    const cardList = basketStoreData()
+    
 
     if(checkEmptyInput(inputs).includes(false)){
         checkEmptyInput(inputs)
@@ -134,12 +137,14 @@ async function registrationProcessing() {
     } else if (password.length < RegistrationKeys.minNumberOfLettersPasswords || !password.match(/[A-ZА-Я]/i)) {
         ErrorMessageHandler.setErrorMessage(errorMessagePasswords, ErrorMessageHandler.passwordIncorrectLength)
     } else {
-        AuthenticationApi.setUserData(email, password, RegistrationKeys.token, city, name, date)
+        AuthenticationApi.setUserData(email, password, RegistrationKeys.token, city, name, date, cardList)
         AlertService.success(RegistrationKeys.successRegistration)
         UserStore.setUserToken(RegistrationKeys.token)
-        checkToken()
         
-        setTimeout(() => location.reload(), 4000)
+        setTimeout(() =>{
+            checkToken()
+            location.reload()
+        }, 4000)
     }
 }
 

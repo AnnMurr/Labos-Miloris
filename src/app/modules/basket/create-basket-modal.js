@@ -1,6 +1,7 @@
-import { closeBusketModalByBtnCross } from "./basket-close"
+import { closeBusketModal } from "./basket-close"
 import { deleteItem, deliteAllItems, changeItemCount } from "./basket"
 import { USDollar } from "../../core/consts/keys"
+import { createOrder } from "../../core/utils/createOrder"
 
 const busketModal = document.querySelector('.basket-modal')
 
@@ -18,7 +19,7 @@ function createBasketModalHeader() {
     const cross = document.createElement('button')
     cross.classList.add('cross')
     cross.type = 'button'
-    cross.addEventListener('click', closeBusketModalByBtnCross)
+    cross.addEventListener('click', closeBusketModal)
 
     heading.append(headingText)
     modalHeader.append(heading, cross)
@@ -115,6 +116,7 @@ function createBasketModalFooterBtns() {
     orderBtn.classList.add('btn', 'basket-modal__order')
     orderBtn.type = 'button'
     orderBtn.textContent = 'Заказать'
+    orderBtn.addEventListener('click', createOrder)
 
     btnsWrapper.append(deliteAllBnt, orderBtn)
 

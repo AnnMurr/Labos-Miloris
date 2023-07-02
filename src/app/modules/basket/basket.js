@@ -1,5 +1,5 @@
 import { CardsApi } from "../../core/API/cards-api"
-import { setCardToStore, getBasketStore } from "../../stores/basket-store"
+import { setCardToStore, basketStoreData } from "../../stores/basket-store"
 import { createBasketItem, createBasketModalFooterBtns, createBasketGeneralPrice } from "./create-basket-modal"
 import { USDollar } from "../../core/consts/keys"
 
@@ -14,12 +14,7 @@ async function getcardsFromApi() {
     return cardsFromApi
 }
 
-function basketStoreData() {
-    const basketStore = getBasketStore()
-    const cardList = JSON.parse(basketStore) || []
 
-    return cardList
-}
 
 function countGeneralPrice() {
     const basketStore = basketStoreData()

@@ -13,7 +13,7 @@ function toggleBusketModal() {
     }
 }
 
-export function closeBusketModalByBtnCross() {
+export function closeBusketModal() {
     busketModal.classList.remove('basket-modal_active')
     checkBusketModalClass()
 }

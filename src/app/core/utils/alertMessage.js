@@ -17,7 +17,7 @@ function addAlert(type, text, icon) {
 
     setTimeout(() => showLine(), 100)
 
-    setTimeout(() => alertWrapper.remove(), 4000)
+    setTimeout(() => alertWrapper.remove(), 3000)
 }
 
 export class AlertService {
