@@ -29,6 +29,14 @@ export class AuthenticationApi {
         })
     }
 
+    static getUserData(userLogin) {
+        return fetch(this.userUrl)
+            .then(response => response.json())
+            .then(data =>  data.find(element => element.login === userLogin))
+
+            .catch(error => { throw error })
+    }
+
     static getUserLogin(userLogin) {
         return fetch(this.userUrl)
             .then(response => response.json())

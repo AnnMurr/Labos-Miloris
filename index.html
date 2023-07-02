@@ -240,8 +240,11 @@
                         <button type="button" class="authentication__sing-up">Регистрация</button>
                     </div>
                     <form class="form">
-                        <input required autocomplete="email" type="email" placeholder="адрес эл.почты">
-                        <input required autocomplete="current-password" type="password" placeholder="Пароль">
+                        <input class="signIn__input-login" required autocomplete="email" type="email" placeholder="адрес эл.почты" data-log-input="login">
+                        <span class="error-message" data-error-log="login"></span>
+                        <input class="signIn__inputp-password" required autocomplete="current-password" type="password" placeholder="Пароль" data-log-input="password">
+                        <button class="btn-show-password" type="button" data-password-log="password">&#x1F441</button>
+                        <span class="error-message" data-error-log="password"></span>
                         <button type="submit" class="btn">Войти</button>
                     </form>
                 </div>

@@ -57,7 +57,7 @@ export const FORM_ELEMENTS = [
     {
         tag: 'button',
         class: 'btn-show-password',
-        attributes: [{ href: '#' }, { 'data-password': 'password-1' }, { type: "button" }],
+        attributes: [{ 'data-password': 'password-1' }, { type: "button" }],
         content: '\u{1F441}'
     },
     {
@@ -74,7 +74,7 @@ export const FORM_ELEMENTS = [
     {
         tag: 'button',
         class: 'btn-show-password',
-        attributes: [{ href: '#' }, { 'data-password': 'password-2' }, { type: "button" }],
+        attributes: [{ 'data-password': 'password-2' }, { type: "button" }],
         content: '\u{1F441}'
     },
     {

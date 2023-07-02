@@ -7,15 +7,6 @@
         margin-top: 60px;
     }
 
-    &__choose {
-        display: flex;
-
-        span {
-            padding: 0 5px;
-        }
-    }
-
-    &__sing-in,
     &__sing-up {
         color: @color-white;
         .transition (@prop, @time, @ease);
@@ -28,6 +19,11 @@
     form {
         display: flex;
         flex-direction: column;
+
+        .btn-show-password {
+            bottom: 40px;
+            right: 10px;
+        }
 
         input {
             padding: 14px 14px;

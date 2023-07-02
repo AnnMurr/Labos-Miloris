@@ -28,6 +28,7 @@ function closeUserModalOutside(event) {
 }
 
 export async function checkToken() {
+    userModal.innerHTML = null
     const token = UserStore.getUserToken()
     const userData = await AuthenticationApi.getUserToken(token)
     !token ?  createUserModal(UserMessageHandler.welcome, UserMessageHandler.signIn) : createUserModal(UserMessageHandler.welcomeUser(userData.name), UserMessageHandler.signOut)
@@ -65,7 +66,7 @@ function createUserBtn(BtnText = UserMessageHandler.signOut) {
 
 function scrollToSignInAndExitFromAccount() {
     const token = UserStore.getUserToken()
-    
+
     if (token) {
         UserStore.removeUserToken()
         location.reload()
