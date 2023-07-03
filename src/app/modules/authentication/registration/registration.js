@@ -57,7 +57,7 @@ function createFormImage() {
 function checgeAtribute() {
     const label = document.querySelector('.registration__label')
     const pageHref = window.location.href
-    label.href = ('href', pageHref === 'http://localhost:1234/index.html' ? './pages/privacy-policy.html' : './privacy-policy.html')
+    label.href = ('href', pageHref === 'http://localhost:1234/index.html' ? './privacy-policy.html' : './privacy-policy.html')
 }
 
 function resetErrorMessage() {

@@ -40,22 +40,13 @@
         text-align: center
     }
 
-    &__different-offers {
-        .element {
-            .transition (@prop, @time, @ease);
-            color: @color-white;
 
-            &:hover {
-                transform: scale(1.1, 1.1);
-            }
-        }
-    }
 
     .element {
         max-width: 125px;
         text-align: center;
         visibility: hidden;
-
+   
         &.anim {
             visibility: visible;
             -webkit-animation: scale-up-center 0.4s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
@@ -83,6 +74,17 @@
 
         @media screen and (@max576) {
             padding-bottom: 30px;
+        }
+    }
+
+    &__different-offers {
+        .element {
+            .transition (@prop, @time, @ease);
+            color: @color-white;
+
+            &:hover {
+                opacity: 0.5;
+            }
         }
     }
 
