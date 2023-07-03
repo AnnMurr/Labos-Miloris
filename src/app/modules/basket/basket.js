@@ -16,7 +16,7 @@ function returnBasket() {
 function createCountBasket() {
     const count = document.createElement('div')
     count.classList.add('basket__count')
-    countText = document.createElement('span')
+    const countText = document.createElement('span')
     countText.textContent = CountElements.countElementsInBasket()
     count.append(countText)
 
