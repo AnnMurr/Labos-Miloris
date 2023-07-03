@@ -3,6 +3,7 @@ import { AlertService } from "../../../core/utils/alertMessage"
 import { UserStore } from "../../../stores/userStore"
 import { checkToken } from "../../user/user"
 import { Basket_Store } from "../../../stores/basket-store"
+import { removeRegistrationBtn } from "../../../core/utils/authentication/removeButtonRegistration"
 
 const loginInput = document.querySelector('.signIn__input-login')
 const loginPassword = document.querySelector('.signIn__inputp-password')
@@ -24,6 +25,7 @@ async function logIn() {
         errorMessagePassword.textContent = 'Неверный пароль'
     } else {
         AlertService.success('Вы вошли в аккаунт')
+        removeRegistrationBtn()
         UserStore.setUserToken(userDataApi.token)
         checkToken()
         loginForm.reset()

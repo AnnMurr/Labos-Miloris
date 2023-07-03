@@ -2,6 +2,7 @@ import { UserStore } from "../../stores/userStore"
 import { UserMessageHandler } from "../../core/helpers/userMessageClass"
 import { AuthenticationApi } from "../../core/API/Authentication-api"
 import { Basket_Store } from "../../stores/basket-store"
+import { removeRegistrationBtn } from "../../core/utils/authentication/removeButtonRegistration"
 
 const user = document.querySelector('.user')
 const userModal = document.querySelector('.user__modal')
@@ -32,7 +33,7 @@ export async function checkToken() {
     userModal.innerHTML = null
     const token = UserStore.getUserToken()
     const userData = await AuthenticationApi.getUserToken(token)
-    !token ?  createUserModal(UserMessageHandler.welcome, UserMessageHandler.signIn) : createUserModal(UserMessageHandler.welcomeUser(userData.name), UserMessageHandler.signOut)
+    !token ? createUserModal(UserMessageHandler.welcome, UserMessageHandler.signIn) : createUserModal(UserMessageHandler.welcomeUser(userData.name), UserMessageHandler.signOut)
 }
 
 export function createUserModal(text, BtnTent) {
@@ -72,8 +73,9 @@ async function scrollToSignInAndExitFromAccount() {
 
     if (token) {
         AuthenticationApi.changeUserOrders(userData.token.toString(), cardList)
-        setTimeout(()=> signOut() ,1000)
-     
+        removeRegistrationBtn()
+        setTimeout(() => signOut(), 1000)
+
     } else {
         const authenticationBlock = document.getElementById('authentication')
         authenticationBlock.scrollIntoView({ behavior: 'smooth' })
@@ -83,7 +85,7 @@ async function scrollToSignInAndExitFromAccount() {
 
 function signOut() {
     UserStore.removeUserToken()
-    Basket_Store.setCardToStore([])    
+    Basket_Store.setCardToStore([])
     location.reload()
 }
 

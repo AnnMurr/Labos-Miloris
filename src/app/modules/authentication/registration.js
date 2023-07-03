@@ -4,6 +4,7 @@ import { ErrorMessageHandler } from "../../core/helpers/messageClass"
 import { AuthenticationApi } from "../../core/API/Authentication-api"
 import { RegistrationKeys } from "../../core/consts/registration-keys"
 import { AlertService } from "../../core/utils/alertMessage"
+import { removeRegistrationBtn } from "../../core/utils/authentication/removeButtonRegistration"
 
 const registrationBtn = document.querySelector('.authentication__sign-up')
 const registration = document.querySelector('.registration')
@@ -134,6 +135,7 @@ async function registrationProcessing() {
     } else {
         AuthenticationApi.setUserData(email, password, RegistrationKeys.token, city, name, date)
         AlertService.error(RegistrationKeys.successRegistration)
+        removeRegistrationBtn()
     }
 }
 
