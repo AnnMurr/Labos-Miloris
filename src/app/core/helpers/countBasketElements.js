@@ -1,6 +1,5 @@
 import { Basket_Store } from "../../stores/basket-store.js"
 
-
 export class CountElements {
     static countElementsInBasket() {
         const cardList = Basket_Store.basketStoreData()

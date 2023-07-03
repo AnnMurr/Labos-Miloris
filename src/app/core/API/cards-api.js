@@ -1,5 +1,5 @@
 export class CardsApi {
-    static cardsUrl = 'https://64901aaa1e6aa71680ca93bb.mockapi.io/cards';
+    static cardsUrl = 'https://64901aaa1e6aa71680ca93bb.mockapi.io/cards'
 
     static getCards() {
         return fetch(CardsApi.cardsUrl)

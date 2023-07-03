@@ -18,13 +18,14 @@ function createCountBasket() {
     count.classList.add('basket__count')
     countText = document.createElement('span')
     countText.textContent = CountElements.countElementsInBasket()
-
     count.append(countText)
+
     return count
 }
 
 async function getcardsFromApi() {
     cardsFromApi = await CardsApi.getCards()
+
     return cardsFromApi
 }
 
@@ -48,14 +49,11 @@ function addItemElements() {
     const basketModalFooter = document.querySelector('.basket-modal__footer')
     const totalAmount = countGeneralPrice()
 
-    if (basketModal.classList.contains('basket-modal_active')) {
-        basketStore.forEach(element => {
-            itemsWrapper.append(createBasketItem(element))
-        })
+    basketModal.classList.contains('basket-modal_active') &&  (basketStore.forEach(element => itemsWrapper.append(createBasketItem(element))))
 
         basketModalFooter.append(createBasketModalFooterBtns(), createBasketGeneralPrice(totalAmount))
         deliteBasketFooter()
-    }
+    
 }
 
 function changeItemCount(event) {
@@ -104,6 +102,7 @@ function changeQuantity(existingItem, cardModel, operationSymbol) {
     let isMinus = operationSymbol === '-'
     existingItem.quantity = (isMinus ? Number(existingItem.quantity) - 1 : Number(existingItem.quantity) + 1).toString()
     existingItem.price = (isMinus ? Number(existingItem.price) - Number(cardModel.price) : Number(existingItem.price) + Number(cardModel.price)).toString()
+
     return existingItem.quantity && existingItem.price
 }
 
@@ -132,7 +131,6 @@ function addToBasketStore(event) {
 }
 
 function deleteItem(event) {
-    
     const basketItem = event.target.parentNode
     const basketStore = Basket_Store.basketStoreData()
     const basketWithoutRemovedItem = basketStore.filter(item => basketItem.id !== item.id)

@@ -16,12 +16,8 @@ export function hiddenCards() {
         }
     })
     
-    if (i >= allCards.length) {
-        showMoreBtn.style.display = 'none'
-    } else {
-        showMoreBtn.style.display = 'block'
-    }
-
+    i >= allCards.length ? showMoreBtn.style.display = 'none' : showMoreBtn.style.display = 'block'
+    
     showMoreBtn.addEventListener('click', clickShow)
 }
 

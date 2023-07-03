@@ -14,6 +14,7 @@ const sourceFunctions = {
 }
 
 function filterCards() {
+
     if (source && sourceFunctions.hasOwnProperty(source)) {
         const getCardsFunction = sourceFunctions[source]
         getElements(getCardsFunction())
@@ -26,9 +27,7 @@ function filterCards() {
 async function getElements(dataCards) {
     let cards = await dataCards
 
-    cards.forEach(element => {
-        createCard(element.url, element.title, element.price, element.id)
-    })
+    cards.forEach(element => createCard(element.url, element.title, element.price, element.id))
 
     createShowMoreBtn()
     hiddenCards()

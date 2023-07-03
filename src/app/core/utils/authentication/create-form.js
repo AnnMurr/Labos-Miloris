@@ -38,7 +38,6 @@ export function createFormElement(form) {
 
         option.content && (element.textContent = option.content)
       
-
         form.append(element)
     })
 }

@@ -1,4 +1,4 @@
-import { USER_TOKEN } from "../core/consts/keys";
+import { USER_TOKEN } from "../core/consts/keys"
 
 export class UserStore {
     static setUserToken(token) {

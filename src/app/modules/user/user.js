@@ -29,14 +29,14 @@ function closeUserModalOutside(event) {
     !userModal.classList.contains('user__modal_active') && document.removeEventListener('click', closeUserModalOutside)
 }
 
-export async function checkToken() {
+async function checkToken() {
     userModal.innerHTML = null
     const token = UserStore.getUserToken()
     const userData = await AuthenticationApi.getUserToken(token)
     !token ? createUserModal(UserMessageHandler.welcome, UserMessageHandler.signIn) : createUserModal(UserMessageHandler.welcomeUser(userData.name), UserMessageHandler.signOut)
 }
 
-export function createUserModal(text, BtnTent) {
+function createUserModal(text, BtnTent) {
     userModal.append(createUserModalHeader(text), createUserBtn(BtnTent))
 }
 
@@ -90,3 +90,5 @@ function signOut() {
 }
 
 document.addEventListener('DOMContentLoaded', checkToken)
+
+export { checkToken, createUserModal }
