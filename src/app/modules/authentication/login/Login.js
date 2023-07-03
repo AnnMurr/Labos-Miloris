@@ -2,7 +2,7 @@ import { AuthenticationApi } from "../../../core/API/Authentication-api"
 import { AlertService } from "../../../core/utils/alertMessage"
 import { UserStore } from "../../../stores/userStore"
 import { checkToken } from "../../user/user"
-import { setCardToStore } from "../../../stores/basket-store"
+import { Basket_Store } from "../../../stores/basket-store"
 
 const loginInput = document.querySelector('.signIn__input-login')
 const loginPassword = document.querySelector('.signIn__inputp-password')
@@ -28,7 +28,7 @@ async function logIn() {
         checkToken()
         loginForm.reset()
         resetErrorMessage()
-        setCardToStore(userDataApi.orders)
+        Basket_Store.setCardToStore(userDataApi.orders)
     }
 }
 

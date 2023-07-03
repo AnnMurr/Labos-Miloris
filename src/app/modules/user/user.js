@@ -1,7 +1,7 @@
 import { UserStore } from "../../stores/userStore"
 import { UserMessageHandler } from "../../core/helpers/userMessageClass"
 import { AuthenticationApi } from "../../core/API/Authentication-api"
-import { basketStoreData, setCardToStore } from "../../stores/basket-store"
+import { Basket_Store } from "../../stores/basket-store"
 
 const user = document.querySelector('.user')
 const userModal = document.querySelector('.user__modal')
@@ -67,7 +67,7 @@ function createUserBtn(BtnText = UserMessageHandler.signOut) {
 
 async function scrollToSignInAndExitFromAccount() {
     const token = UserStore.getUserToken()
-    const cardList = basketStoreData()
+    const cardList = Basket_Store.basketStoreData()
     const userData = await AuthenticationApi.getUserToken(token)
 
     if (token) {
@@ -83,7 +83,7 @@ async function scrollToSignInAndExitFromAccount() {
 
 function signOut() {
     UserStore.removeUserToken()
-    setCardToStore([])    
+    Basket_Store.setCardToStore([])    
     location.reload()
 }
 

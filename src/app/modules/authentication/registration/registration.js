@@ -6,7 +6,7 @@ import { RegistrationKeys } from "../../../core/consts/registration-keys.js"
 import { AlertService } from "../../../core/utils/alertMessage.js"
 import { UserStore } from "../../../stores/userStore.js"
 import { checkToken } from "../../user/user.js"
-import { basketStoreData } from "../../../stores/basket-store.js"
+import { Basket_Store } from "../../../stores/basket-store.js"
 
 const registrationBtn = document.querySelector('.authentication__sing-up')
 const registration = document.querySelector('.registration')
@@ -113,7 +113,7 @@ async function registrationProcessing() {
     const errorMessageEmail = document.getElementById('error-email')
     const errorMessagePasswords = document.querySelector('[data-error="password-1"]')
     const userLogin = await AuthenticationApi.getUserLogin(email)
-    const cardList = basketStoreData()
+    const cardList = Basket_Store.basketStoreData()
     
 
     if(checkEmptyInput(inputs).includes(false)){
