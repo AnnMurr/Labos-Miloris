@@ -46,7 +46,7 @@ export class CardsApi {
             .catch(error => { throw error })
     }
 
-    static getselectiveCards() {
+    static getSelectiveCards() {
         return fetch(CardsApi.cardsUrl)
             .then(response => response.json())
             .then(data => {
