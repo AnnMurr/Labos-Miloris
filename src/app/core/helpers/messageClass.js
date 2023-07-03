@@ -8,6 +8,8 @@ export class ErrorMessageHandler {
 
     static whiteSpace = 'Строки не должны содержать пробелы'
 
+    static invalidEmail = 'Неправильно введенный e-mail'
+
     static errorMessageMaxQuantity(element, maxNumber, symbols) {
         element.textContent = `Имя не должно содержать ${symbols}\nМаксимальное кол-во ${maxNumber} символов`
     }

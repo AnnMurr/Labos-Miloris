@@ -7,9 +7,10 @@ import { AlertService } from "../../../core/utils/alertMessage.js"
 import { UserStore } from "../../../stores/userStore.js"
 import { checkToken } from "../../user/user.js"
 import { Basket_Store } from "../../../stores/basket-store.js"
+import { removeRegistrationBtn } from "../../../core/utils/authentication/removeButtonRegistration.js"
 
-const registrationBtn = document.querySelector('.authentication__sign-up')
 const registration = document.querySelector('.registration')
+const registrationBtn = document.querySelector('.authentication__sign-up')
 
 registrationBtn.addEventListener('click', function () {
     const registrationClassActive = 'registration_active'
@@ -83,24 +84,25 @@ function showPassword() {
     })
 }
 
-    const checkEmptyInput = (inputs) => {
-        let isEmpty = []
-        inputs.forEach(input => {
-            let dataInput = input.getAttribute('data-input')
-            let errorMessage = document.querySelector(`[data-error="${dataInput}"]`)
-            if (dataInput === 'checkbox' && !input.checked) { 
-                errorMessage.textContent = 'Подтвердите согласие'
-                isEmpty.push(false)
-            } else if (input.value === '')  {
-                errorMessage.textContent = 'Поле должно быть заполнено'
-                isEmpty.push(false)
-            } else{
-                isEmpty.push(true)
-            }
-        })
+const checkEmptyInput = (inputs) => {
+    let isEmpty = []
 
-        return isEmpty;
-    }
+    inputs.forEach(input => {
+        let dataInput = input.getAttribute('data-input')
+        let errorMessage = document.querySelector(`[data-error="${dataInput}"]`)
+        if (dataInput === 'checkbox' && !input.checked) {
+            errorMessage.textContent = 'Подтвердите согласие'
+            isEmpty.push(false)
+        } else if (input.value === '') {
+            errorMessage.textContent = 'Поле должно быть заполнено'
+            isEmpty.push(false)
+        } else {
+            isEmpty.push(true)
+        }
+    })
+
+    return isEmpty;
+}
 
 async function registrationProcessing() {
     resetErrorMessage()
@@ -114,9 +116,9 @@ async function registrationProcessing() {
     const errorMessagePasswords = document.querySelector('[data-error="password-1"]')
     const userLogin = await AuthenticationApi.getUserLogin(email)
     const cardList = Basket_Store.basketStoreData()
-    
+    const emailPattern = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
 
-    if(checkEmptyInput(inputs).includes(false)){
+    if (checkEmptyInput(inputs).includes(false)) {
         checkEmptyInput(inputs)
     } else if (!CITIES.includes(city)) {
         ErrorMessageHandler.setErrorMessage(errorMessageCity, ErrorMessageHandler.chooseAnotherCity)
@@ -128,6 +130,8 @@ async function registrationProcessing() {
         ErrorMessageHandler.setErrorMessage(errorMessagePasswords, ErrorMessageHandler.whiteSpace)
     } else if (name.length > RegistrationKeys.maxNumberOfLettersName || name.match(RegistrationKeys.specialSymbolsArray)) {
         ErrorMessageHandler.errorMessageMaxQuantity(errorMessageName, RegistrationKeys.maxNumberOfLettersName, RegistrationKeys.specialSymbols)
+    } else if (!emailPattern.test(email)) {
+        ErrorMessageHandler.setErrorMessage(errorMessageEmail, ErrorMessageHandler.invalidEmail)
     } else if (email.length > RegistrationKeys.maxNumberOfLettersEmail) {
         ErrorMessageHandler.errorMessageMaxQuantity(errorMessageEmail, RegistrationKeys.maxNumberOfLettersEmail)
     } else if (userLogin) {
@@ -140,8 +144,9 @@ async function registrationProcessing() {
         AuthenticationApi.setUserData(email, password, RegistrationKeys.token, city, name, date, cardList)
         AlertService.success(RegistrationKeys.successRegistration)
         UserStore.setUserToken(RegistrationKeys.token)
-        
-        setTimeout(() =>{
+        removeRegistrationBtn()
+
+        setTimeout(() => {
             checkToken()
             location.reload()
         }, 4000)

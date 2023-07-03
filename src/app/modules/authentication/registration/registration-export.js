@@ -1,1 +1,0 @@
-export * as registration from './registration.js'
