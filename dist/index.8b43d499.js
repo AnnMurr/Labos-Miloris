@@ -1,0 +1,2 @@
+const e=document.querySelector(".catalog__item-women"),t=document.querySelector(".catalog__item-men"),c=document.querySelector(".catalog__item-selective");e.addEventListener("click",()=>{localStorage.setItem("source","catalogWomenBtn")}),t.addEventListener("click",()=>{localStorage.setItem("source","catalogMenBtn")}),c.addEventListener("click",()=>{localStorage.setItem("source","catalogSelectiveBtn")});
+//# sourceMappingURL=index.8b43d499.js.map
