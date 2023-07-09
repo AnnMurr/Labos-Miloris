@@ -7,3 +7,4 @@ import { login } from "./modules/authentication/export-authentication.js"
 import { btnUp } from "./components/btn-up/export-btnUp.js"
 import { alert } from "../app/core/utils/alertMessage.js"
 import { animation } from "./core/utils/export-utils.js"
+import './index.less'
