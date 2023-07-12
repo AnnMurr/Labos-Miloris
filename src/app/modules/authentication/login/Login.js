@@ -4,6 +4,7 @@ import { UserStore } from "../../../stores/userStore"
 import { checkToken } from "../../user/user"
 import { Basket_Store } from "../../../stores/basket-store"
 import { removeRegistrationBtn } from "../../../core/utils/authentication/removeButtonRegistration"
+import { CountElements } from "../../../core/helpers/countBasketElements"
 
 const loginInput = document.querySelector('.signIn__input-login')
 const loginPassword = document.querySelector('.signIn__inputp-password')
@@ -31,6 +32,7 @@ async function logIn() {
         loginForm.reset()
         resetErrorMessage()
         Basket_Store.setCardToStore(userDataApi.orders)
+        CountElements.changeBasketCount()
     }
 }
 
@@ -43,7 +45,11 @@ function resetErrorMessage() {
 
 function showPassword() {
     const showPasswordBtn = document.querySelector('[data-password-log="password"]')
-    showPasswordBtn.addEventListener('click', () => loginPassword.type =  loginPassword.type === 'password' ? 'text' : 'password')
+    const btnShowPasswordShow = 'btn-show-password_show'
+    showPasswordBtn.addEventListener('click', () => {
+        loginPassword.type =  loginPassword.type === 'password' ? 'text' : 'password'
+        showPasswordBtn.classList.contains(btnShowPasswordShow) ? showPasswordBtn.classList.remove(btnShowPasswordShow) : showPasswordBtn.classList.add(btnShowPasswordShow)
+    })
 }
 
 function submitForm(event) {

@@ -11,7 +11,7 @@ export function createOrder() {
         AlertService.success('Заказ успешно создан')
         Basket_Store.setCardToStore([])
         closeBusketModal()
-        CountElements.cheangeBasketCount()
+        CountElements.changeBasketCount()
     } else {
         AlertService.warning('Авторизуйтесь, чтобы сделать заказ')
     }

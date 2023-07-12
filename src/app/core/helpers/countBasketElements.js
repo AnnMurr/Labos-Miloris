@@ -11,7 +11,7 @@ export class CountElements {
         return count
     }
 
-    static cheangeBasketCount() {
+    static changeBasketCount() {
         const basketCountText  = document.querySelector('.basket__count span')
         basketCountText.textContent = this.countElementsInBasket()
     }

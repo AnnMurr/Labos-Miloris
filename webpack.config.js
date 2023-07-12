@@ -5,22 +5,9 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
     entry: {
-        index: './src/app/index.js',
-        'export-btnUp': './src/app/components/btn-up/export-btnUp.js',
-        cards: './src/app/modules/cards/cards.js',
-        'export-cards': './src/app/modules/cards/export-cards.js',
-        'export-burger': './src/app/modules/burger/export-burger.js',
-        'basket-export': './src/app/modules/basket/basket-export.js',
-        'export-authentication': './src/app/modules/authentication/export-authentication.js',
-        'alert-message': './src/app/core/utils/alertMessage.js',
-        'export-utils': './src/app/core/utils/export-utils.js',
-        'filter-catalog': './src/app/core/utils/filter-catalog.js',
-        'user': './src/app/modules/user/user.js',
-        'basket-close': './src/app/modules/basket/basket-close.js',
-        'basket': './src/app/modules/basket/basket.js',
-        'create-basket-modal': './src/app/modules/basket/create-basket-modal.js',
-        'userStore': './src/app/stores/userStore.js',
-        'basket-store': './src/app/stores/basket-store.js',
+        'index': './src/app/index.js',
+        'cards': './src/app/modules/cards/cards.js',
+        'filter-catalog': './src/app/core/utils/filter-catalog.js'
     },
     output: {
         path: path.resolve(__dirname, 'dist'),
@@ -85,7 +72,7 @@ module.exports = {
         new HtmlWebpackPlugin({
             template: './assortment.html',
             filename: 'assortment.html',
-            chunks: ['index', 'export-cards', 'user', 'basket-close', 'basket-export', 'basket', 'create-basket-modal', 'userStore', 'basket-store'],
+            chunks: ['cards', 'index'],
         }),
         new HtmlWebpackPlugin({
             template: './contact.html',
