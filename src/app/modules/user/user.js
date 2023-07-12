@@ -88,6 +88,7 @@ async function scrollToSignInAndExitFromAccount() {
 
     } else {
         const authenticationBlock = document.getElementById('authentication')
+        hideScroll(null, null, null)
         authenticationBlock.scrollIntoView({ behavior: 'smooth' })
         userModal.classList.remove('user__modal_active')
     }

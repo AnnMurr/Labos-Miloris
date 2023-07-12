@@ -6,6 +6,8 @@
   background-size: cover;
   background-repeat: no-repeat;
   top: 0;
+  right: 0;
+  bottom: 0;
   left: 0;
   right: 51.9%;
   z-index: -1;
