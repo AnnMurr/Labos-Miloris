@@ -26,7 +26,7 @@ function returnSubmenuBasket() {
 }
 
 function createCountBasket() {
-    console.log('count')
+
     const count = document.createElement('div')
     count.classList.add('basket__count')
     const countText = document.createElement('span')
@@ -63,7 +63,6 @@ function addItemElements() {
     const totalAmount = countGeneralPrice()
 
     if(basketModal.classList.contains('basket-modal_active')) {
-        console.log('ифы')
         basketStore.forEach(element => itemsWrapper.append(createBasketItem(element)))
         basketModalFooter.append(createBasketModalFooterBtns(), createBasketGeneralPrice(totalAmount))
         deliteBasketFooter()

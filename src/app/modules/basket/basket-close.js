@@ -1,3 +1,5 @@
+import { hideScroll } from "../../core/utils/hideScroll"
+
 const busketModal = document.querySelector('.basket-modal')
 const busketBtn = document.querySelector('.basket')
 const submenuBasketBtn = document.querySelector('.submenu__basket')
@@ -8,16 +10,12 @@ submenuBasketBtn.addEventListener('click', toggleBusketModal)
 
 function toggleBusketModal() {
 
-    if(submenu.style.display === 'block') {
-        submenu.style.display === 'none'
-        console.log(submenu.style.display)
-    }
+    submenu.classList.contains('submenu_active') && (submenu.classList.remove('submenu_active'))
 
     if(!busketModal.classList.contains('basket-modal_active')) {
         busketModal.classList.add('basket-modal_active')
         checkBusketModalClass()
     } else {
-        console.log('!active')
         busketModal.classList.remove('basket-modal_active')
         checkBusketModalClass()
     }
@@ -26,6 +24,7 @@ function toggleBusketModal() {
 export function closeBusketModal() {
     busketModal.classList.remove('basket-modal_active')
     checkBusketModalClass()
+    hideScroll(null, null, null)
 }
 
 function closeBusketModalOutside(event) {
