@@ -26,7 +26,6 @@ function returnSubmenuBasket() {
 }
 
 function createCountBasket() {
-
     const count = document.createElement('div')
     count.classList.add('basket__count')
     const countText = document.createElement('span')
