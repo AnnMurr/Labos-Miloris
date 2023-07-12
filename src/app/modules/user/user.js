@@ -5,12 +5,19 @@ import { Basket_Store } from "../../stores/basket-store"
 import { removeRegistrationBtn } from "../../core/utils/authentication/removeButtonRegistration"
 
 const user = document.querySelector('.user')
+const userSubmenu = document.querySelector('.submenu__user')
 const userModal = document.querySelector('.user__modal')
 
 user.addEventListener('click', openUserModal)
+userSubmenu.addEventListener('click', openUserModal)
 
 function openUserModal() {
-    userModal.classList.toggle('user__modal_active')
+    if(!userModal.classList.contains('user__modal_active')) {
+        userModal.classList.add('user__modal_active')
+    } else {
+        userModal.classList.remove('user__modal_active')
+    }
+    
     checkUserModalClass()
 }
 
@@ -25,7 +32,7 @@ function checkUserModalClass() {
 }
 
 function closeUserModalOutside(event) {
-    !userModal.contains(event.target) && !user.contains(event.target) && (userModal.classList.remove('user__modal_active'))
+    !userModal.contains(event.target) && !user.contains(event.target) && !userSubmenu.contains(event.target) && (userModal.classList.remove('user__modal_active'))
     !userModal.classList.contains('user__modal_active') && document.removeEventListener('click', closeUserModalOutside)
 }
 

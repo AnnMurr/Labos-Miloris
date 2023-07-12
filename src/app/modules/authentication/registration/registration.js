@@ -70,7 +70,7 @@ function showPassword() {
     const inputRepeatPassword = document.querySelector('[data-input="password-2"]')
     const btnShow1 = document.querySelector('[data-password="password-1"]')
     const btnShow2 = document.querySelector('[data-password="password-2"]')
-    const btns = document.querySelectorAll('.btn-show-password')
+    const btns = document.querySelectorAll('[data-password]')
 
     btns.forEach(btn => {
         btn.addEventListener('click', function (event) {

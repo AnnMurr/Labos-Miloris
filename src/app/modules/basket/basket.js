@@ -3,17 +3,30 @@ import { createBasketItem, createBasketModalFooterBtns, createBasketGeneralPrice
 import { USDollar } from "../../core/consts/keys"
 import { CountElements } from "../../core/helpers/countBasketElements"
 import { Basket_Store } from "../../stores/basket-store"
+import { AlertService } from "../../core/utils/alertMessage"
 
 const basketBtn = document.querySelector('.basket')
 const basketModal = document.querySelector('.basket-modal')
+const submenuBasketBtn = document.querySelector('.submenu__basket')
 let cardsFromApi
+
+const addEventListenerByBtnToBasket = () => {
+    const toBasketBtn = document.querySelectorAll('.card-btn')
+
+    toBasketBtn && (toBasketBtn.forEach(btn => btn.addEventListener('click', addToBasketStore)))
+}
 
 function returnBasket() {
     basketBtn.addEventListener('click', addItemElements)
-    basketBtn.append(createCountBasket())
+    !document.querySelector('.basket__count') &&  (basketBtn.append(createCountBasket()))
+}
+
+function returnSubmenuBasket() {
+    submenuBasketBtn.addEventListener('click', addItemElements)
 }
 
 function createCountBasket() {
+    console.log('count')
     const count = document.createElement('div')
     count.classList.add('basket__count')
     const countText = document.createElement('span')
@@ -49,11 +62,12 @@ function addItemElements() {
     const basketModalFooter = document.querySelector('.basket-modal__footer')
     const totalAmount = countGeneralPrice()
 
-    basketModal.classList.contains('basket-modal_active') &&  (basketStore.forEach(element => itemsWrapper.append(createBasketItem(element))))
-
+    if(basketModal.classList.contains('basket-modal_active')) {
+        console.log('ифы')
+        basketStore.forEach(element => itemsWrapper.append(createBasketItem(element)))
         basketModalFooter.append(createBasketModalFooterBtns(), createBasketGeneralPrice(totalAmount))
         deliteBasketFooter()
-    
+    }
 }
 
 function changeItemCount(event) {
@@ -89,7 +103,7 @@ function changeItemCount(event) {
 
     Basket_Store.setCardToStore(newBasketStore)
     changeGeneralPrice()
-    CountElements.cheangeBasketCount()
+    CountElements.changeBasketCount()
 }
 
 function changeQuantityText(eventTarget, existingItem, elementPrice) {
@@ -127,7 +141,8 @@ function addToBasketStore(event) {
     }
 
     Basket_Store.setCardToStore(newBasketStore)
-    CountElements.cheangeBasketCount()
+    CountElements.changeBasketCount()
+    AlertService.success('Товар добавлен в корзину')
 }
 
 function deleteItem(event) {
@@ -140,7 +155,7 @@ function deleteItem(event) {
         basketItem.remove()
         deliteBasketFooter()
         changeGeneralPrice()
-        CountElements.cheangeBasketCount()
+        CountElements.changeBasketCount()
     }
 }
 
@@ -149,7 +164,7 @@ function deliteAllItems() {
     itemsWrapper.textContent = 'Корзина пуста'
     Basket_Store.setCardToStore([])
     deliteBasketFooter()
-    CountElements.cheangeBasketCount()
+    CountElements.changeBasketCount()
 }
 
 function deliteBasketFooter() {
@@ -168,6 +183,8 @@ function deliteBasketFooter() {
 function init() {
     getcardsFromApi()
     returnBasket()
+    returnSubmenuBasket() 
+    setTimeout(()=> addEventListenerByBtnToBasket(), 1000)
 }
 
 export { addToBasketStore, deleteItem, deliteAllItems, changeItemCount }

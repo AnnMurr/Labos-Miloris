@@ -3,16 +3,15 @@ const submenu = document.querySelector('.submenu')
 const closeBtn = document.querySelector('.cross')
 
 burgerBtn.addEventListener('click', openSubmenu)
-closeBtn.addEventListener('click', function() {
-    closeBtn.parentNode.parentNode.style.display = 'none'
-})
+closeBtn.addEventListener('click', () => submenu.classList.remove('submenu_active'))
 
 function openSubmenu() {
-    if( submenu.style.display === 'none') {
-        submenu.style.display = 'block'
+
+    if(!submenu.classList.contains('submenu_active')) {
+        submenu.classList.add('submenu_active')
         document.addEventListener('click', closeSubmenu)
     } else {
-        submenu.style.display = 'none'
+        submenu.classList.remove('submenu_active')
         document.removeEventListener('click', closeSubmenu)
     }
 }
@@ -21,7 +20,7 @@ function closeSubmenu(event) {
     if(!submenu.contains(event.target) 
     && !closeBtn.contains(event.target) 
     && !burgerBtn.contains(event.target)) {
-        submenu.style.display = 'none'
+        submenu.classList.remove('submenu_active')
         document.removeEventListener('click', closeSubmenu)
     }
 }

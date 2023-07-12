@@ -1,6 +1,5 @@
 import { CardsApi } from "../../core/API/cards-api"
 import { hiddenCards } from "../../core/utils/show-more"
-import { addToBasketStore } from "../basket/basket.js"
 import { USDollar } from "../../core/consts/keys"
 
 const cardsWrapper = document.querySelector('.cards__wrapper')
@@ -96,12 +95,11 @@ function createCardInfoPrice(PriceText) {
     return cardInfoPrice
 }
 
-function createBtnToBasket() {
+export function createBtnToBasket() {
     const cardBtn = document.createElement('button')
-    cardBtn.classList.add('btn')
+    cardBtn.classList.add('btn', 'card-btn')
     cardBtn.type = 'button'
     cardBtn.textContent = 'В корзину'
-    cardBtn.addEventListener('click', addToBasketStore)
 
     return cardBtn
 }

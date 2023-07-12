@@ -11,6 +11,10 @@
     height: 100vh;
     z-index: 5;
 
+    &_active {
+        display: block;
+    }
+
     @media screen and(@max576) {
         width: 100%;
     }
@@ -22,7 +26,8 @@
 
     li {
         padding-bottom: 15px;
-        a {
+        a,
+        button {
             color: @color-white;
             font-family: @sub-font;
             font-weight: 400;
