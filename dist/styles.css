@@ -243,6 +243,12 @@
   -webkit-animation: tilt-in-bottom-1 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
   animation: tilt-in-bottom-1 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
+@media screen and (max-width: 768px) {
+  .catalog__item.anim {
+    -webkit-animation: none;
+    animation: none;
+  }
+}
 .catalog__item:last-child {
   padding: 0;
 }
@@ -784,6 +790,8 @@ html {
     width: 100%;
     height: 100vh;
     top: 0;
+    right: 0;
+    bottom: 0;
     left: 0;
     z-index: 10;
     border: none;
@@ -1063,6 +1071,8 @@ html {
     max-width: 100%;
     height: 100vh;
     top: 0;
+    right: 0;
+    bottom: 0;
     left: 0;
     z-index: 10;
     border: none;
@@ -1229,13 +1239,13 @@ html {
   flex-direction: column;
 }
 .authentication form .btn-show-password {
-  bottom: 55px;
+  bottom: 40px;
   right: 10px;
 }
 .authentication form input {
   padding: 14px 14px;
   width: 100%;
-  margin-bottom: 14px;
+  margin-top: 5px;
 }
 .authentication form input::placeholder {
   font-weight: 300;
@@ -1244,6 +1254,7 @@ html {
   color: #000;
 }
 .authentication form .btn {
+  margin-top: 14px;
   max-width: 100%;
   background-color: #856802;
   color: #fff;

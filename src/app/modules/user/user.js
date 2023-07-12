@@ -3,6 +3,7 @@ import { UserMessageHandler } from "../../core/helpers/userMessageClass"
 import { AuthenticationApi } from "../../core/API/Authentication-api"
 import { Basket_Store } from "../../stores/basket-store"
 import { removeRegistrationBtn } from "../../core/utils/authentication/removeButtonRegistration"
+import { hideScroll } from "../../core/utils/hideScroll"
 
 const user = document.querySelector('.user')
 const userSubmenu = document.querySelector('.submenu__user')
@@ -12,6 +13,7 @@ user.addEventListener('click', openUserModal)
 userSubmenu.addEventListener('click', openUserModal)
 
 function openUserModal() {
+
     if(!userModal.classList.contains('user__modal_active')) {
         userModal.classList.add('user__modal_active')
     } else {
@@ -24,6 +26,7 @@ function openUserModal() {
 function closeUserModal() {
     userModal.classList.remove('user__modal_active')
     checkUserModalClass()
+    hideScroll(null, null, null)
 }
 
 function checkUserModalClass() {

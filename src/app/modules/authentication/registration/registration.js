@@ -8,13 +8,14 @@ import { UserStore } from "../../../stores/userStore.js"
 import { checkToken } from "../../user/user.js"
 import { Basket_Store } from "../../../stores/basket-store.js"
 import { removeRegistrationBtn } from "../../../core/utils/authentication/removeButtonRegistration.js"
+import { hideScroll } from "../../../core/utils/hideScroll.js"
 
 const registration = document.querySelector('.registration')
 const registrationBtn = document.querySelector('.authentication__sign-up')
 
-registrationBtn.addEventListener('click', function () {
-    const registrationClassActive = 'registration_active'
-    !registration.classList.contains(registrationClassActive) ? registration.classList.add(registrationClassActive) : registration.classList.remove(registrationClassActive)
+registrationBtn.addEventListener('click', () => {
+        registration.classList.add('registration_active')
+        hideScroll('fixed', '100%', 'scroll')
 })
 
 export function createDataList(dataList) {
