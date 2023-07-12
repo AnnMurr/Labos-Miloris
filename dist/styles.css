@@ -1112,6 +1112,11 @@ html {
   align-items: center;
   display: none;
 }
+@media screen and (max-width: 576px) {
+  .registration {
+    padding-top: 0;
+  }
+}
 .registration_active {
   display: flex;
 }
